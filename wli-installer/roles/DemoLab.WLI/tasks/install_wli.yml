@@ -1,4 +1,10 @@
-- name: Install Oracle JDK
-  package:
-    name: "{{ app_mount_dir.path }}/WLI/jdk-8u211-linux-x64.rpm" 
-    state: present
+- name: Extract WLI ZIP file
+  unarchive:
+    src: "{{ app_mount_dir.path }}/{{ nfs_server_subdir }}/{{ wli_filename }}"
+    dest: "{{ oracle_software_dir }}"
+    remote_src: true
+
+- name: Install WLI using response file
+  shell: "source ~/{{ user_profile }} && $JAVA_HOME/bin/java -Xmx1024m -jar {{ oracle_software_dir }}/{{ wli_installer_jar  }} -silent -responseFile {{ response_file_wli }} -invPtrLoc {{ orainst_inventory_file }}"
+  become: yes
+  become_user: "{{ oracle_user }}"

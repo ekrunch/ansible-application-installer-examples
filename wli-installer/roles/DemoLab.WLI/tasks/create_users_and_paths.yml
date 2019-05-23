@@ -1,12 +1,12 @@
-- name: Create the oinstall Group
+- name: "Create the {{ oracle_group }} Group"
   group: 
-    name: oinstall
+    name: "{{ oracle_group }}" 
     state: present
 
 - name: Create the oracle User
   user:
-    name: oracle
-    group: oinstall
+    name: "{{ oracle_user }}" 
+    group: "{{ oracle_group }}" 
     state: present
     update_password: always
     password: "$6$mysecretsalt$lxylT5/9wlw9WuBfvTqwo3NjO1PJwZTV4KVGSAIe2xlTgChgaK.4sJh2y2OtiDFettZkCfZcdvLXfeutyXaxA."
@@ -15,28 +15,20 @@
 - debug:
     var: oracle_user_profile
 
-- name: Create Oracle Directories (1 or 3)
+- name: Create Oracle Directories
   file:
+    path: "{{ item }}"
     state: directory
-    path: "{{ oracle_middleware_dir }}"
-    
-- name: Create Oracle Directories (2 or 3)
-  file:
-    state: directory
-    path: "{{ oracle_config_domain_dir }}"
-    
-- name: Create Oracle Directories (3 or 3)
-  file:
-    state: directory
-    path: "{{ oracle_config_app_dir }}"
-    
-- name: Change ownership to Oracle User
-  file:
-    path: "{{ oracle_home_dir }}"
-    state: directory
-    recurse: yes
-    owner: oracle
-    group: oinstall
+    mode: '0755'
+    owner: "{{ oracle_user }}" 
+    group: "{{ oracle_group }}" 
+  with_items:
+    - "{{ oracle_home_dir }}"
+    - "{{ oracle_middleware_dir }}"
+    - "{{ oracle_config_domain_dir }}"
+    - "{{ oracle_config_app_dir }}"
+    - "{{ oracle_software_dir }}"
+    - "{{ oracle_inventory_home_dir }}"
 
 - name: Remove existing Oracle variables file
   file:
@@ -48,8 +40,8 @@
     path: "{{ oracle_user_profile.home }}/{{ oracle_env_file }}"
     state: present
     create: yes
-    owner: oracle
-    group: oinstall
+    owner: "{{ oracle_user }}" 
+    group: "{{ oracle_group }}" 
     mode: 0755
     block: |
       export MW_HOME={{ oracle_middleware_dir }}
@@ -64,8 +56,8 @@
     path: "{{ oracle_user_profile.home }}/{{ user_profile }}"
     state: present
     create: yes
-    owner: oracle
-    group: oinstall
+    owner: "{{ oracle_user }}" 
+    group: "{{ oracle_group }}" 
     insertbefore: BOF
     mode: 0755
     block: |

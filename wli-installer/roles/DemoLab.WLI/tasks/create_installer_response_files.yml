@@ -1,57 +1,33 @@
-- name: Create Response File Directories
+- name: Remove existing response files
   file:
-    state: directory
-    path: "{{ response_file_dir }}"
-    
-- name: Change ownership to Oracle User
-  file:
-    path: "{{ response_file_dir }}"
-    state: directory
-    recurse: yes
-    owner: oracle
-    group: oinstall
-
-- name: Remove existing response files (1 of 2)
-  file:
-    path: "{{ response_file_wli }}"
+    path: "{{ item }}"
     state: absent
+  with_items:
+    - "{{ response_file_wli }}"
+    - "{{ response_file_mw }}"
+    - "{{ orainst_inventory_file }}"
 
-- name: Remove existing response files (2 of 2)
-  file:
-    path: "{{ response_file_mw }}"
-    state: absent
+- name: Create WLI response file from template
+  template:
+    src: wls.rsp.j2
+    dest: "{{ response_file_wli }}"
+    owner: "{{ oracle_user }}"
+    group: "{{ oracle_group }}"
+    mode: 0644
 
-- name: Add variables to oracle environment file for the Oracle user
-  blockinfile:
-    path: "{{ oracle_user_profile.home }}/{{ oracle_env_file }}"
-    state: present
-    create: yes
-    owner: oracle
-    group: oinstall
-    mode: 0755
-    block: |
-      export MW_HOME={{ oracle_middleware_dir }}
-      export WLS_HOME=$MW_HOME/wlserver
-      export WL_HOME=$WLS_HOME
-      # Set to the appropriate JAVA_HOME.
-      export JAVA_HOME={{ java_home_dir }}
-      export PATH=$JAVA_HOME/bin:$PATH
+- name: Create Fusion Middleware response file from template
+  template:
+    src: fmw_infr.rsp.j2
+    dest: "{{ response_file_mw }}"
+    owner: "{{ oracle_user }}"
+    group: "{{ oracle_group }}"
+    mode: 0644
 
-- name: Add environment file to user profile
-  blockinfile:
-    path: "{{ oracle_user_profile.home }}/{{ user_profile }}"
-    state: present
-    create: yes
-    owner: oracle
-    group: oinstall
-    insertbefore: BOF
-    mode: 0755
-    block: |
-      if [ -f ~/{{ oracle_env_file }} ]; then
-        . ~/{{ oracle_env_file }}
-      fi
+- name: Create Oracle Inventory location file from template
+  template:
+    src: oraInst.loc.j2
+    dest: "{{ orainst_inventory_file }}"
+    owner: "{{ oracle_user }}"
+    group: "{{ oracle_group }}"
+    mode: 0644
 
-- name: Warn user of existing logins
-  debug:
-    msg: Profile for the Oracle user has been updated, any existing logins will need to log in again to recognize the changes.
-  

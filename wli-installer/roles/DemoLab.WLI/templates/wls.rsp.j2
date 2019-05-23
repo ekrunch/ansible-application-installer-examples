@@ -1,14 +1,14 @@
 [ENGINE]
 Response File Version=1.0.0.0.0
 [GENERIC]
-ORACLE_HOME=/u01/app/oracle/middleware
+ORACLE_HOME={{ oracle_middleware_dir }}
 INSTALL_TYPE=WebLogic Server
-MYORACLESUPPORT_USERNAME=
-MYORACLESUPPORT_PASSWORD=<SECURE VALUE>
-DECLINE_SECURITY_UPDATES=true
-SECURITY_UPDATES_VIA_MYORACLESUPPORT=false
-PROXY_HOST=
-PROXY_PORT=
-PROXY_USER=
-PROXY_PWD=<SECURE VALUE>
-COLLECTOR_SUPPORTHUB_URL=
+MYORACLESUPPORT_USERNAME={{ myoraclesupport_username }}
+MYORACLESUPPORT_PASSWORD={{ myoraclesupport_password }}
+DECLINE_SECURITY_UPDATES={{ decline_security_updates }}
+SECURITY_UPDATES_VIA_MYORACLESUPPORT={{ security_updates_via_myoraclesupport }}
+PROXY_HOST={{ oracle_proxy_host }}
+PROXY_PORT={{ oracle_proxy_port }}
+PROXY_USER={{ oracle_proxy_user }}
+PROXY_PWD={{ oracle_proxy_password }}
+COLLECTOR_SUPPORTHUB_URL={{ oracle_collector_supporthub_url }}
