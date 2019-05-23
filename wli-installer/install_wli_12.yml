@@ -1,4 +1,4 @@
 ---
-- hosts: wliservers
+- hosts: all
   roles:
   - role: DemoLab.WLI
