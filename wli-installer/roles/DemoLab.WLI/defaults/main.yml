@@ -1,0 +1,24 @@
+---
+oracle_home_dir: "/u01/app/oracle"
+oracle_middleware_dir: "{{ oracle_home_dir }}/middleware"
+oracle_config_domain_dir: "{{ oracle_home_dir }}/config/domains"
+oracle_config_app_dir: "{{ oracle_home_dir }}/config/applications"
+oracle_env_file: "oracle.env"
+java_home_dir: "/usr/java/jdk1.8.0_211-amd64"
+user_profile: .bash_profile
+
+response_file_dir: "/u01/software"
+response_file_wli: "{{ response_file_dir }}/wls.rsp"
+response_file_mw: "{{ response_file_dir }}/fmw_infr.rsp"
+
+myoraclesupport_username: null
+myoraclesupport_password: null
+decline_security_updates: true
+security_updates_via_myoraclesupport: false
+
+oracle_proxy_host: null
+oracle_proxy_port: null
+oracle_proxy_user: null
+oracle_proxy_password: null
+oracle_collector_supporthub_url: null
+

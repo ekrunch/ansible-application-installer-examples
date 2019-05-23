@@ -1,0 +1,6 @@
+- name: install the latest version of nfs client
+  package:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - nfs-utils

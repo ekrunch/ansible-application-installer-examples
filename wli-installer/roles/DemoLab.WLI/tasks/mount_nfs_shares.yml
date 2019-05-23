@@ -1,0 +1,33 @@
+- name: Create mount point for Applications
+  file:
+    path: "{{ app_mount_dir.path }}"
+    state: directory
+    mode: '0755'
+
+- name: Mount NFS Share
+  mount:
+    path: "{{ app_mount_dir.path }}"
+    src: pepper:/volume1/Applications
+    fstype: nfs
+    state: mounted
+
+- name: Ensure JDK installer exists
+  stat:
+    path: "{{ app_mount_dir.path }}/WLI/jdk-8u211-linux-x64.rpm"
+  register: jdk_state
+
+- name: Fail if JDK Installer doesn't exist
+  fail:
+    msg: "JDK Installer file does not exist! Please check NFS share"
+  when: jdk_state.stat.exists == false
+
+- name: Ensure WLI installer exists
+  stat:
+    path: "{{ app_mount_dir.path }}/WLI/fmw_12.2.1.3.0_wls_Disk1_1of1.zip"
+  register: installer_state
+
+- name: Fail if WLI Installer doesn't exist
+  fail:
+    msg: "WLI Installer file does not exist! Please check NFS share"
+  when: installer_state.stat.exists == false
+

@@ -1,0 +1,79 @@
+- name: Create the oinstall Group
+  group: 
+    name: oinstall
+    state: present
+
+- name: Create the oracle User
+  user:
+    name: oracle
+    group: oinstall
+    state: present
+    update_password: always
+    password: "$6$mysecretsalt$lxylT5/9wlw9WuBfvTqwo3NjO1PJwZTV4KVGSAIe2xlTgChgaK.4sJh2y2OtiDFettZkCfZcdvLXfeutyXaxA."
+  register: oracle_user_profile
+
+- debug:
+    var: oracle_user_profile
+
+- name: Create Oracle Directories (1 or 3)
+  file:
+    state: directory
+    path: "{{ oracle_middleware_dir }}"
+    
+- name: Create Oracle Directories (2 or 3)
+  file:
+    state: directory
+    path: "{{ oracle_config_domain_dir }}"
+    
+- name: Create Oracle Directories (3 or 3)
+  file:
+    state: directory
+    path: "{{ oracle_config_app_dir }}"
+    
+- name: Change ownership to Oracle User
+  file:
+    path: "{{ oracle_home_dir }}"
+    state: directory
+    recurse: yes
+    owner: oracle
+    group: oinstall
+
+- name: Remove existing Oracle variables file
+  file:
+    path: "{{ oracle_user_profile.home }}/{{ oracle_env_file }}"
+    state: absent
+
+- name: Add variables to oracle environment file for the Oracle user
+  blockinfile:
+    path: "{{ oracle_user_profile.home }}/{{ oracle_env_file }}"
+    state: present
+    create: yes
+    owner: oracle
+    group: oinstall
+    mode: 0755
+    block: |
+      export MW_HOME={{ oracle_middleware_dir }}
+      export WLS_HOME=$MW_HOME/wlserver
+      export WL_HOME=$WLS_HOME
+      # Set to the appropriate JAVA_HOME.
+      export JAVA_HOME={{ java_home_dir }}
+      export PATH=$JAVA_HOME/bin:$PATH
+
+- name: Add environment file to user profile
+  blockinfile:
+    path: "{{ oracle_user_profile.home }}/{{ user_profile }}"
+    state: present
+    create: yes
+    owner: oracle
+    group: oinstall
+    insertbefore: BOF
+    mode: 0755
+    block: |
+      if [ -f ~/{{ oracle_env_file }} ]; then
+        . ~/{{ oracle_env_file }}
+      fi
+
+- name: Warn user of existing logins
+  debug:
+    msg: Profile for the Oracle user has been updated, any existing logins will need to log in again to recognize the changes.
+  

@@ -1,0 +1,4 @@
+- name: Install Oracle JDK
+  package:
+    name: "{{ app_mount_dir.path }}/WLI/jdk-8u211-linux-x64.rpm" 
+    state: present

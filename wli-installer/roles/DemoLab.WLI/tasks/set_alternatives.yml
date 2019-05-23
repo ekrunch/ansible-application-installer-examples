@@ -1,0 +1,9 @@
+- name: Setup Java defaults (java)
+  alternatives:
+    name: java
+    path: /usr/java/jdk1.8.0_211-amd64/jre/bin/java
+
+- name: Setup Java defaults (javac)
+  alternatives:
+    name: javac
+    path: /usr/java/jdk1.8.0_211-amd64/bin/javac

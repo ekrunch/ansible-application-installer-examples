@@ -1,0 +1,57 @@
+- name: Create Response File Directories
+  file:
+    state: directory
+    path: "{{ response_file_dir }}"
+    
+- name: Change ownership to Oracle User
+  file:
+    path: "{{ response_file_dir }}"
+    state: directory
+    recurse: yes
+    owner: oracle
+    group: oinstall
+
+- name: Remove existing response files (1 of 2)
+  file:
+    path: "{{ response_file_wli }}"
+    state: absent
+
+- name: Remove existing response files (2 of 2)
+  file:
+    path: "{{ response_file_mw }}"
+    state: absent
+
+- name: Add variables to oracle environment file for the Oracle user
+  blockinfile:
+    path: "{{ oracle_user_profile.home }}/{{ oracle_env_file }}"
+    state: present
+    create: yes
+    owner: oracle
+    group: oinstall
+    mode: 0755
+    block: |
+      export MW_HOME={{ oracle_middleware_dir }}
+      export WLS_HOME=$MW_HOME/wlserver
+      export WL_HOME=$WLS_HOME
+      # Set to the appropriate JAVA_HOME.
+      export JAVA_HOME={{ java_home_dir }}
+      export PATH=$JAVA_HOME/bin:$PATH
+
+- name: Add environment file to user profile
+  blockinfile:
+    path: "{{ oracle_user_profile.home }}/{{ user_profile }}"
+    state: present
+    create: yes
+    owner: oracle
+    group: oinstall
+    insertbefore: BOF
+    mode: 0755
+    block: |
+      if [ -f ~/{{ oracle_env_file }} ]; then
+        . ~/{{ oracle_env_file }}
+      fi
+
+- name: Warn user of existing logins
+  debug:
+    msg: Profile for the Oracle user has been updated, any existing logins will need to log in again to recognize the changes.
+  

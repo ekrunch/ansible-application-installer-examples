@@ -1,0 +1,6 @@
+- name: Unmount NFS Share
+  mount:
+    path: "{{ app_mount_dir.path }}"
+    src: pepper:/volume1/Applications
+    fstype: nfs
+    state: absent

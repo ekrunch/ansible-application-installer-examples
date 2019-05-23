@@ -1,0 +1,11 @@
+- name: create temporary mount directory
+  tempfile:
+    state: directory
+    suffix: mountpount
+  register: app_mount_dir
+
+- name: create temporary WLI installer directory
+  tempfile:
+    state: directory
+    suffix: wliinstaller
+  register: wli_temp_dir

@@ -1,0 +1,9 @@
+- name: Remove mount point for Applications
+  file:
+    path: "{{ app_mount_dir.path }}"
+    state: absent
+
+- name: Remove temp directory for WLI installer
+  file:
+    path: "{{ wli_temp_dir.path }}"
+    state: absent

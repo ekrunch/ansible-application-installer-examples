@@ -1,0 +1,32 @@
+- name: Execute WLI Installer Routine
+  block:
+  - name: Create temporary directories
+    import_tasks: create_temp_dirs.yml
+
+  - name: Install prerequisite packages
+    import_tasks: required_packages.yml
+
+  - name: Mount NFS Shares
+    import_tasks: mount_nfs_shares.yml
+
+  - name: Install JDK
+    import_tasks: install_jdk.yml
+
+  - name: Setup JDK
+    import_tasks: set_alternatives.yml
+
+  - name: Create Required Users, Groups, and Paths
+    import_tasks: create_users_and_paths.yml
+
+  - name: Create installer response files
+    import_tasks: create_installer_response_files.yml
+
+  - name: Install WLI
+    import_tasks: install_wli.yml
+
+  always:
+  - name: Unmount NFS Shares
+    import_tasks: unmount_nfs_shares.yml
+
+  - name: Remove Temp Dirs
+    import_tasks: remove_temp_dirs.yml
