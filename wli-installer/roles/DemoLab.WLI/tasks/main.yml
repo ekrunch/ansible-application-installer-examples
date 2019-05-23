@@ -21,8 +21,8 @@
   - name: Create installer response files
     import_tasks: create_installer_response_files.yml
 
-  - name: Install WLI
-    import_tasks: install_wli.yml
+  - name: Install WLI and FMW
+    import_tasks: install_products.yml
 
   always:
   - name: Unmount NFS Shares

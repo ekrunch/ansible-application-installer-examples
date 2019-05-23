@@ -1,9 +1,15 @@
 ---
+install_fusion_middleware: true
+
 nfs_server_mountpoint: "pepper:/volume1/Applications"
 nfs_server_subdir: "WLI"
 
 jdk_filename: "jdk-8u211-linux-x64.rpm"
 wli_filename: "fmw_12.2.1.3.0_wls_Disk1_1of1.zip"
+fmw_filename: "fmw_12.2.1.3.0_infrastructure_Disk1_1of1.zip"
+
+wli_installer_jar: fmw_12.2.1.3.0_wls.jar
+fmw_installer_jar: fmw_12.2.1.3.0_infrastructure.jar
 
 oracle_home_dir: "/u01/app/oracle"
 oracle_inventory_home_dir: "/u01/app/oraInventory"
@@ -19,7 +25,7 @@ oracle_group: oinstall
 
 oracle_software_dir: "/u01/software"
 response_file_wli: "{{ oracle_software_dir }}/wls.rsp"
-response_file_mw: "{{ oracle_software_dir }}/fmw_infr.rsp"
+response_file_fmw: "{{ oracle_software_dir }}/fmw_infr.rsp"
 orainst_inventory_file: "{{ oracle_software_dir }}/oraInst.loc"
 
 myoraclesupport_username: null
@@ -32,6 +38,4 @@ oracle_proxy_port: null
 oracle_proxy_user: null
 oracle_proxy_password: null
 oracle_collector_supporthub_url: null
-
-wli_installer_jar: fmw_12.2.1.3.0_wls.jar
 

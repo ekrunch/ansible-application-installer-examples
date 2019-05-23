@@ -4,7 +4,7 @@
     state: absent
   with_items:
     - "{{ response_file_wli }}"
-    - "{{ response_file_mw }}"
+    - "{{ response_file_fmw }}"
     - "{{ orainst_inventory_file }}"
 
 - name: Create WLI response file from template
@@ -18,7 +18,7 @@
 - name: Create Fusion Middleware response file from template
   template:
     src: fmw_infr.rsp.j2
-    dest: "{{ response_file_mw }}"
+    dest: "{{ response_file_fmw }}"
     owner: "{{ oracle_user }}"
     group: "{{ oracle_group }}"
     mode: 0644
