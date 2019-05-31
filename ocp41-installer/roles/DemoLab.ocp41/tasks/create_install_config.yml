@@ -1,0 +1,12 @@
+- name: Remove existing install configuration file
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ install-file-fullname }}"
+
+- name: Create openshift-install install-config file from template
+  template:
+    src: install-config.yml.j2
+    dest: "{{ install-file-fullname }}"
+    mode: 0644

@@ -1,0 +1,6 @@
+- name: Execute WLI Installer Routine
+  block:
+  - name: Create installer configuration files
+    import_tasks: create_install_config.yml
+
+  always:
