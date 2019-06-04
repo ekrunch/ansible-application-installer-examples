@@ -1,5 +1,5 @@
 apiVersion: v1
-baseDomain: {{ base-domain | mandatory }}
+baseDomain: {{ base_domain | mandatory }}
 compute:
 - hyperthreading: Enabled   
   name: worker
@@ -10,7 +10,7 @@ controlPlane:
   name: master
   replicas: 3 
 metadata:
-  name: {{ cluster-name | mandatory }}
+  name: {{ cluster_name | mandatory }}
 platform:
   vsphere:
     vcenter: {{ vsphere_server | mandatory }}
