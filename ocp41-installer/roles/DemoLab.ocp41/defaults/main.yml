@@ -37,7 +37,7 @@ pull_secret: '{"auths": ...}'
 ssh_key: 'ssh-ed25519 AAAA...'
 
 # RHCOS OVA image
-rhcos_ova: 'https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.1/4.1.0-rc.4/rhcos-410.8.20190516.0-vmware.ova'
+rhcos_ova: 'https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.1/latest/rhcos-4.1.0-x86_64-vmware.ova'
 
 # Web Server URL (for hosting the bootstrap.ign)
 bootstrap_url_server: "https://webserver.internal.yourdomain.com/OCP/bootstrap.ign"
