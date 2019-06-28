@@ -5,9 +5,6 @@ bastionhost
 base_domain="internal.yourdomain.com"
 cluster_name=ocp4
 
-workernodes=2
-masternodes=3
-
 vsphere_server="vcenter.internal.yourdomain.com"
 vsphere_username="administrator@internal.yourdomain.com"
 vsphere_password="test123"
@@ -26,10 +23,10 @@ bootstrap_server_directory="/usr/share/nginx/html/OCP"
 localhost ansible_connection=local
 
 [masters]
-master1.internal.unixwarhammer.com mac_address='00:11:22:33:44:55'
-master2.internal.unixwarhammer.com mac_address='01:11:22:33:44:55'
-master3.internal.unixwarhammer.com mac_address='02:11:22:33:44:55'
+master1.internal.unixwarhammer.com vm_mac_address='00:11:22:33:44:55'
+master2.internal.unixwarhammer.com vm_mac_address='01:11:22:33:44:55'
+master3.internal.unixwarhammer.com vm_mac_address='02:11:22:33:44:55'
 
 [workers]
-worker1.internal.unixwarhammer.com mac_address='10:11:22:33:44:55'
-worker2.internal.unixwarhammer.com mac_address='11:11:22:33:44:55'
+worker1.internal.unixwarhammer.com vm_mac_address='10:11:22:33:44:55'
+worker2.internal.unixwarhammer.com vm_mac_address='11:11:22:33:44:55'

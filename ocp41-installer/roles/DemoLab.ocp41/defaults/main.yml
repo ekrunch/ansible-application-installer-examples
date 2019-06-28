@@ -6,7 +6,7 @@ ocp4_installer_directory: "/root/ocp"
 ocp4_installer_filename: "openshift-install"
 ocp4_install_config_name: "install-config.yaml"
 ocp4_install_files_directory: "/root/ocp/install"
-ocp4_installer_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-install-linux-4.1.0.tar.gz"
+ocp4_installer_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-install-linux-4.1.3.tar.gz"
 ocp4_installer_archive_name: "{{ ocp4_installer_url | basename }}"
 ocp4_installer_sha_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/sha256sum.txt"
 
@@ -17,11 +17,6 @@ ocp4_installer_file_fullarchivename: "{{ ocp4_installer_directory }}/{{ ocp4_ins
 # Cluster Variables
 base_domain: "internal.yourdomain.com"
 cluster_name: ocp4
-
-# Note that in the install-config, worker nodes will be set to zero as this
-# is what the instructions say to do.
-workernodes: 2
-masternodes: 3
 
 vsphere_server: "vcenter.internal.yourdomain.com"
 vsphere_username: "administrator@internal.yourdomain.com"
