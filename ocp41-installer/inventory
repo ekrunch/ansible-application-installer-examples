@@ -25,3 +25,11 @@ bootstrap_server_directory="/usr/share/nginx/html/OCP"
 [bastionhost]
 localhost ansible_connection=local
 
+[masters]
+master1.internal.unixwarhammer.com mac_address='00:11:22:33:44:55'
+master2.internal.unixwarhammer.com mac_address='01:11:22:33:44:55'
+master3.internal.unixwarhammer.com mac_address='02:11:22:33:44:55'
+
+[workers]
+worker1.internal.unixwarhammer.com mac_address='10:11:22:33:44:55'
+worker2.internal.unixwarhammer.com mac_address='11:11:22:33:44:55'
