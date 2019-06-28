@@ -15,3 +15,4 @@ The following steps are performed (This is all still WIP so some of this might n
 
 Review roles/DemoLab.ocp41/defaults/main.yml for variables that can be changed to make this example work in another environment.
 
+To use this, copy the inventory.sample file to custom (this folder is ignored by git) and customize it to your environment.
