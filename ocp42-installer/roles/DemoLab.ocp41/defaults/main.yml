@@ -1,0 +1,40 @@
+---
+# This is the directory where the openshift-install file is located
+# The install-files-directory will be passed to the installer
+# and will contain the resulting ignition files and base64 conversions
+ocp4_installer_directory: "/root/ocp"
+ocp4_installer_filename: "openshift-install"
+ocp4_install_config_name: "install-config.yaml"
+ocp4_install_files_directory: "/root/ocp/install"
+ocp4_installer_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-install-linux-4.1.3.tar.gz"
+ocp4_installer_archive_name: "{{ ocp4_installer_url | basename }}"
+ocp4_installer_sha_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/sha256sum.txt"
+
+# Some combined variable names to make the later tasks easier to write :)
+ocp4_install_file_fullname: "{{ ocp4_installer_directory }}/{{ ocp4_install_config_name}}"
+ocp4_installer_file_fullarchivename: "{{ ocp4_installer_directory }}/{{ ocp4_installer_archive_name }}"
+
+# Cluster Variables
+base_domain: "internal.yourdomain.com"
+cluster_name: ocp4
+
+vsphere_server: "vcenter.internal.yourdomain.com"
+vsphere_username: "administrator@internal.yourdomain.com"
+vsphere_password: "test123"
+vsphere_datacenter: "datacenter"
+vsphere_datastore: "datastore"
+
+# Pull secret is obtained from try.openshift.com
+pull_secret: '{"auths": ...}'
+
+# Provide an SSH public key for installation onto the nodes. Username is
+# Core for CoreOS nodes.
+ssh_key: 'ssh-ed25519 AAAA...'
+
+# RHCOS OVA image
+rhcos_ova: 'https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.1/latest/rhcos-4.1.0-x86_64-vmware.ova'
+
+# Web Server URL (for hosting the bootstrap.ign)
+bootstrap_url_server: "https://webserver.internal.yourdomain.com/OCP/bootstrap.ign"
+bootstrap_server_name: "webserver.internal.yourdomain.com"
+bootstrap_server_directory: "/usr/share/nginx/html/OCP"

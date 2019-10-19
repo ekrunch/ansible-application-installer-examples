@@ -1,0 +1,21 @@
+- name: Create the OCP installation dir if it doesn't exist
+  file:
+    path: "{{ ocp4_installer_directory }}"
+    state: directory
+    mode: 0755
+
+- name: Create the OCP installation files directory
+  file:
+    path: "{{ ocp4_install_files_directory }}"
+    state: directory
+    mode: 0755
+
+- debug:
+    msg: "{{ ocp4_installer_url }}"
+- debug:
+    msg: "{{ ocp4_installer_file_fullarchivename }}"
+
+- name: Download the latest openshift installer
+  get_url:
+    url: "{{ ocp4_installer_url }}"
+    dest: "{{ ocp4_installer_file_fullarchivename }}"
