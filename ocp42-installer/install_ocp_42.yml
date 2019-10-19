@@ -1,4 +1,4 @@
 ---
 - hosts: OSEv4
   roles:
-  - role: DemoLab.ocp41
+  - role: DemoLab.ocp42
