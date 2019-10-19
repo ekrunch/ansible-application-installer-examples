@@ -1,0 +1,9 @@
+    - name: Deploy RHCOS template from OVA
+      vmware_deploy_ovf:
+        hostname: '{{ vsphere_server }}'
+        username: '{{ vsphere_username }}'
+        password: '{{ vsphere_password }}'
+        datacenter: '{{ vsphere_datacenter }}'
+        datastore: '{{ vsphere_datastore }}'
+        hostname: '{{ esxi_hostname }}'
+        name: '{{ rhcos_template_name }}'

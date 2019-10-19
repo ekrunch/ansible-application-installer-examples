@@ -1,0 +1,21 @@
+---
+vms:
+  - bootstrap
+  - master1
+  - master2
+  - master3
+  - worker1
+  - worker2
+  - worker3
+
+rhcos_template_name: "RHCOS"
+ocp_cluster_folder: "ocp4"
+
+node_memory_mb: 32768
+node_num_cpus: 8
+node_num_cpu_cores_per_socket: 4
+
+metadata_bootstrap: ""
+metadata_master: ""
+metadata_worker: ""
+

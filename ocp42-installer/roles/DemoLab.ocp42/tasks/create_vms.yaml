@@ -1,0 +1,19 @@
+    - name: Deploy OCP 4.2 VMs from RHCOS template
+      vmware_guest:
+        hostname: "{{ vsphere_server }}"
+        username: "{{ vsphere_username }}"
+        password: "{{ vsphere_password }}"
+        datacenter: "{{ vsphere_datacenter }}"
+        datastore: "{{ vsphere_datastore }}"
+        validate_certs: False
+        folder: "{{ ocp_cluster_folder }}"
+        template: "{{ rhcos_template_name }}"
+        state: "poweredoff"
+        name: "{{ vm_name }}"
+        hardware:
+          memory_mb: "{{ node_memory_mb }}"
+          num_cpus: "{{ node_num_cpus }}"
+          num_cpu_cores_per_socket: "{{ node_num_cpu_cores_per_socket }}"
+          scsi: paravirtual
+      delegate_to: localhost
+

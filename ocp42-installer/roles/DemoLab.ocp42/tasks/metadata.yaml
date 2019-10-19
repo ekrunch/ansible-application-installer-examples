@@ -1,0 +1,81 @@
+    - name: "Deploy Starting Metadata on {{ vm_name }}"
+      vmware_guest:
+        hostname: "{{ vsphere_server }}"
+        username: "{{ vsphere_username }}"
+        password: "{{ vsphere_password }}"
+        datacenter: "{{ vsphere_datacenter }}"
+        datastore: "{{ vsphere_datastore }}"
+        esxi_hostname: "{{ esxi_hostname }}"
+        validate_certs: False
+        folder: "{{ ocp_cluster_folder }}"
+        state: "present"
+        name: "{{ vm_name }}"
+        vapp_properties:
+          - id: "disk.EnableUUID"
+            type: boolean
+            value: 'True'
+            operation: edit
+          - id: "guestinfo.ignition.config.data.encoding"
+            type: string
+            value: "base64"
+            operation: edit
+      delegate_to: localhost
+
+    - name: "Deploy Bootstrap metadata on {{ vm_name }}"
+      vmware_guest:
+        hostname: "{{ vsphere_server }}"
+        username: "{{ vsphere_username }}"
+        password: "{{ vsphere_password }}"
+        datacenter: "{{ vsphere_datacenter }}"
+        datastore: "{{ vsphere_datastore }}"
+        esxi_hostname: "{{ esxi_hostname }}"
+        validate_certs: False
+        folder: "{{ ocp_cluster_folder }}"
+        state: "present"
+        name: "{{ vm_name }}"
+        vapp_properties:
+          - id: "guestinfo.ignition.config.data"
+            type: string
+            value: "{{ metadata_bootstrap }}"
+            operation: edit
+      when: vm_name.find("bootstrap") != -1
+      delegate_to: localhost
+
+    - name: "Deploy Master metadata on {{ vm_name }}"
+      vmware_guest:
+        hostname: "{{ vsphere_server }}"
+        username: "{{ vsphere_username }}"
+        password: "{{ vsphere_password }}"
+        datacenter: "{{ vsphere_datacenter }}"
+        esxi_hostname: "{{ esxi_hostname }}"
+        validate_certs: False
+        folder: "{{ ocp_cluster_folder }}"
+        state: "present"
+        name: "{{ vm_name }}"
+        vapp_properties:
+          - id: "guestinfo.ignition.config.data"
+            type: string
+            value: "{{ metadata_master }}"
+            operation: edit
+      when: vm_name.find("master") != -1
+      delegate_to: localhost
+
+    - name: "Deploy Worker metadata on {{ vm_name }}"
+      vmware_guest:
+        hostname: "{{ vsphere_server }}"
+        username: "{{ vsphere_username }}"
+        password: "{{ vsphere_password }}"
+        datacenter: "{{ vsphere_datacenter }}"
+        esxi_hostname: "{{ esxi_hostname }}"
+        validate_certs: False
+        folder: "{{ ocp_cluster_folder }}"
+        state: "present"
+        name: "{{ vm_name }}"
+        vapp_properties:
+          - id: "guestinfo.ignition.config.data"
+            type: string
+            value: "{{ metadata_worker }}"
+            operation: edit
+      when: vm_name.find("worker") != -1
+      delegate_to: localhost
+

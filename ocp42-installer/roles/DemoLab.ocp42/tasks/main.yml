@@ -4,3 +4,7 @@
   - name: Create installer configuration files
     import_tasks: create_install_config.yml
 
+# Add section to set base64 variablees
+
+  - name: Create VMs and set metadata
+    import_tasks: create_cluster.yaml

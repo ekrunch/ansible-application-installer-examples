@@ -1,4 +1,6 @@
 ---
 - hosts: OSEv4
+  vars_files:
+    - vars/vm_metadata.yaml
   roles:
   - role: DemoLab.ocp42
