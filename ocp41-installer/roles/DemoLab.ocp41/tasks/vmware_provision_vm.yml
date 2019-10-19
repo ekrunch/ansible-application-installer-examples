@@ -1,2 +1,0 @@
-- debug:
-    msg: Beginning {{ vm_function }} VM provisioning on {{ vm_hostname }} with {{ vm_mac_address }}
