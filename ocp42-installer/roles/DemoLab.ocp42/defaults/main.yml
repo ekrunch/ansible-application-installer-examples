@@ -2,16 +2,16 @@
 # This is the directory where the openshift-install file is located
 # The install-files-directory will be passed to the installer
 # and will contain the resulting ignition files and base64 conversions
-ocp4_installer_directory: "/root/ocp"
+ocp4_installer_directory: "/home/presutti/ocp"
 ocp4_installer_filename: "openshift-install"
 ocp4_install_config_name: "install-config.yaml"
-ocp4_install_files_directory: "/root/ocp/install"
+ocp4_install_files_directory: "{{ ocp4_installer_directory }}/data"
 ocp4_installer_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-install-linux-4.2.0.tar.gz"
 ocp4_installer_archive_name: "{{ ocp4_installer_url | basename }}"
 ocp4_installer_sha_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/sha256sum.txt"
 
 # Some combined variable names to make the later tasks easier to write :)
-ocp4_install_file_fullname: "{{ ocp4_installer_directory }}/{{ ocp4_install_config_name}}"
+ocp4_install_file_fullname: "{{ ocp4_install_files_directory }}/{{ ocp4_install_config_name}}"
 ocp4_installer_file_fullarchivename: "{{ ocp4_installer_directory }}/{{ ocp4_installer_archive_name }}"
 
 # Cluster Variables
@@ -23,6 +23,8 @@ vsphere_username: "administrator@internal.yourdomain.com"
 vsphere_password: "test123"
 vsphere_datacenter: "datacenter"
 vsphere_datastore: "datastore"
+ocp_cluster_folder: "ocp4"
+rhcos_template_name: "RHCOS"
 
 # Pull secret is obtained from try.openshift.com
 pull_secret: '{"auths": ...}'
@@ -38,3 +40,22 @@ rhcos_ova: 'https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.2
 bootstrap_url_server: "https://webserver.internal.yourdomain.com/OCP/bootstrap.ign"
 bootstrap_server_name: "webserver.internal.yourdomain.com"
 bootstrap_server_directory: "/usr/share/nginx/html/OCP"
+
+# Node creation defaults
+node_memory_mb: 32768
+node_num_cpus: 8
+node_num_cpu_cores_per_socket: 4
+
+metadata_bootstrap: ""
+metadata_master: ""
+metadata_worker: ""
+
+# Hopefully removing this soon and going to an inventory based set up
+vms:
+  - bootstrap
+  - master1
+  - master2
+  - master3
+  - worker1
+  - worker2
+  - worker3

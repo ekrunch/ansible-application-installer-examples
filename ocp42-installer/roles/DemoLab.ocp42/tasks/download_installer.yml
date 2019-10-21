@@ -4,16 +4,17 @@
     state: directory
     mode: 0755
 
+- name: Remove old OCP installation files directory in case it exists
+  file:
+    path: "{{ ocp4_install_files_directory }}"
+    state: absent
+    mode: 0755
+
 - name: Create the OCP installation files directory
   file:
     path: "{{ ocp4_install_files_directory }}"
     state: directory
     mode: 0755
-
-- debug:
-    msg: "{{ ocp4_installer_url }}"
-- debug:
-    msg: "{{ ocp4_installer_file_fullarchivename }}"
 
 - name: Download the latest openshift installer
   get_url:

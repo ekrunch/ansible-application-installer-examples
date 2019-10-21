@@ -3,6 +3,8 @@ Demo for installing Openshift 4.2 on VMware (vCenter required).
 
 ** WIP - Nothing works here yet **
 
+** Requires Ansible 2.9 - At the time of writing Ansible 2.9 is currently in RC status so things might change with the production version. **
+
 This process automated the User Provisioned Installation (UPI) documented [here](https://docs.openshift.com/container-platform/4.2/installing/installing_vsphere/installing-vsphere.html#installation-dns-user-infra_installing-vsphere)
 
 The following steps are performed (This is all still WIP so some of this might not be complete yet)
