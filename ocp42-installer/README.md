@@ -1,4 +1,4 @@
-# ocp41-installer
+# ocp42-installer
 Demo for installing Openshift 4.2 on VMware (vCenter required).
 
 ** WIP - Nothing works here yet **
@@ -13,6 +13,6 @@ The following steps are performed (This is all still WIP so some of this might n
 - Create the bootstrap VM and relevant DNS configuration
 - Create the master VMs, remove the bootstrap VM, then create the worker VMs.
 
-Review roles/DemoLab.ocp41/defaults/main.yml for variables that can be changed to make this example work in another environment.
+Review roles/DemoLab.ocp42/defaults/main.yml for variables that can be changed to make this example work in another environment.
 
 To use this, copy the inventory.sample file to custom/inventory (this folder is ignored by git) and customize it to your environment.
