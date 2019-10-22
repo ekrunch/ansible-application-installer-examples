@@ -10,9 +10,15 @@ ocp4_installer_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/l
 ocp4_installer_archive_name: "{{ ocp4_installer_url | basename }}"
 ocp4_installer_sha_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/sha256sum.txt"
 
+# RHCOS OVA image
+rhcos_ova_url: 'https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.2/latest/rhcos-4.2.0-x86_64-vmware.ova'
+rhcos_ova_archive_name: "{{ rhcos_ova_url | basename }}"
+rhcos_ova_sha_url: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.2/latest/sha256sum.txt"
+
 # Some combined variable names to make the later tasks easier to write :)
 ocp4_install_file_fullname: "{{ ocp4_install_files_directory }}/{{ ocp4_install_config_name}}"
 ocp4_installer_file_fullarchivename: "{{ ocp4_installer_directory }}/{{ ocp4_installer_archive_name }}"
+rhcos_ova_file_fullname: "{{ ocp4_installer_directory }}/{{ rhcos_ova_archive_name }}"
 
 # Cluster Variables
 base_domain: "internal.yourdomain.com"
@@ -25,6 +31,7 @@ vsphere_datacenter: "datacenter"
 vsphere_datastore: "datastore"
 ocp_cluster_folder: "ocp4"
 rhcos_template_name: "RHCOS"
+rhcos_template_vm_network: "VM Network"
 
 # Pull secret is obtained from try.openshift.com
 pull_secret: '{"auths": ...}'
@@ -32,9 +39,6 @@ pull_secret: '{"auths": ...}'
 # Provide an SSH public key for installation onto the nodes. Username is
 # Core for CoreOS nodes.
 ssh_key: 'ssh-ed25519 AAAA...'
-
-# RHCOS OVA image
-rhcos_ova: 'https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.2/latest/rhcos-4.2.0-x86_64-vmware.ova'
 
 # Web Server URL (for hosting the bootstrap.ign)
 bootstrap_url_server: "https://webserver.internal.yourdomain.com/OCP/bootstrap.ign"
@@ -45,6 +49,10 @@ bootstrap_server_directory: "/usr/share/nginx/html/OCP"
 node_memory_mb: 32768
 node_num_cpus: 8
 node_num_cpu_cores_per_socket: 4
+
+# Cluster node counts
+cluster_master_replicas: 3
+cluster_worker_replicas: 3
 
 metadata_bootstrap: ""
 metadata_master: ""

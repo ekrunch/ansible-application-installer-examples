@@ -16,7 +16,14 @@
     state: directory
     mode: 0755
 
-- name: Download the latest openshift installer
+- name: Download the openshift installer
   get_url:
     url: "{{ ocp4_installer_url }}"
     dest: "{{ ocp4_installer_file_fullarchivename }}"
+    checksum: "sha256:{{ ocp4_installer_sha_url }}"
+
+- name: Download the CoreOS OVA
+  get_url:
+    url: "{{ rhcos_ova_url }}"
+    dest: "{{ rhcos_ova_file_fullname }}"
+    checksum: "sha256:{{ rhcos_ova_sha_url }}"

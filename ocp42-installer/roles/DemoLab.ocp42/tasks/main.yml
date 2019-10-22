@@ -6,5 +6,8 @@
 
 # Add section to set base64 variablees
 
+  - name: Create template in VMware
+    import_tasks: vmware_create_template.yml
+
 #  - name: Create VMs and set metadata
 #    import_tasks: create_cluster.yaml

@@ -1,4 +1,4 @@
-- name: Remove existing install configuration file
+- name: Remove existing install configuration file (it should be gone already)
   file:
     path: "{{ item }}"
     state: absent
@@ -10,3 +10,13 @@
     src: install-config.yml.j2
     dest: "{{ ocp4_install_file_fullname }}"
     mode: 0644
+
+- name: Extract Openshift Installer
+  unarchive:
+    src: "{{ ocp4_installer_file_fullarchivename }}"
+    dest: "{{ ocp4_installer_directory }}"
+    remote_src: true
+
+#- name: Execute Openshift Installer
+#  command:
+

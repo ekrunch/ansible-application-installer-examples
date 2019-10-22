@@ -1,0 +1,38 @@
+    - name: Create VMware Folder (if it doesn't exist)
+      vcenter_folder:
+        hostname: '{{ vsphere_server }}'
+        username: '{{ vsphere_username }}'
+        password: '{{ vsphere_password }}'
+        datacenter_name: '{{ vsphere_datacenter }}'
+        folder_name: '{{ ocp_cluster_folder }}'
+        folder_type: vm
+        validate_certs: False
+        state: present
+
+    - name: Remove existing RHCOS template (if it exists)
+      vmware_guest:
+        hostname: '{{ vsphere_server }}'
+        username: '{{ vsphere_username }}'
+        password: '{{ vsphere_password }}'
+        datacenter: '{{ vsphere_datacenter }}'
+        datastore: '{{ vsphere_datastore }}'
+        esxi_hostname: '{{ esxi_hostname }}'
+        name: '{{ rhcos_template_name }}'
+        folder: '{{ ocp_cluster_folder }}'
+        validate_certs: False
+        state: absent
+
+    - name: Deploy RHCOS template from OVA
+      vmware_deploy_ovf:
+        hostname: '{{ vsphere_server }}'
+        username: '{{ vsphere_username }}'
+        password: '{{ vsphere_password }}'
+        datacenter: '{{ vsphere_datacenter }}'
+        datastore: '{{ vsphere_datastore }}'
+        name: '{{ rhcos_template_name }}'
+        folder: '{{ vsphere_datacenter }}/vm/{{ ocp_cluster_folder }}'
+        networks: "{u'VM Network':u'{{ rhcos_template_vm_network }}'}"
+        validate_certs: False
+        power_on: False
+        ovf: '{{ rhcos_ova_file_fullname }}'
+        #disk_provisioning: thin
