@@ -8,6 +8,7 @@
         folder_type: vm
         validate_certs: False
         state: present
+      delegate_to: localhost
 
     - name: Remove existing RHCOS template (if it exists)
       vmware_guest:
@@ -21,6 +22,7 @@
         folder: '{{ ocp_cluster_folder }}'
         validate_certs: False
         state: absent
+      delegate_to: localhost
 
     - name: Deploy RHCOS template from OVA
       vmware_deploy_ovf:
@@ -30,9 +32,15 @@
         datacenter: '{{ vsphere_datacenter }}'
         datastore: '{{ vsphere_datastore }}'
         name: '{{ rhcos_template_name }}'
-        folder: '{{ vsphere_datacenter }}/vm/{{ ocp_cluster_folder }}'
-        networks: "{u'VM Network':u'{{ rhcos_template_vm_network }}'}"
+        folder: '/{{ vsphere_datacenter }}/vm/{{ ocp_cluster_folder }}'
+        networks: 
+          "VM Network": '{{ rhcos_template_vm_network }}'
         validate_certs: False
         power_on: False
         ovf: '{{ rhcos_ova_file_fullname }}'
         #disk_provisioning: thin
+        disk_provisioning: eagerZeroedThick
+        properties:
+          guestinfo.ignition.config.data: ""
+          guestinfo.ignition.config.data.encoding: "base64"
+      delegate_to: localhost
