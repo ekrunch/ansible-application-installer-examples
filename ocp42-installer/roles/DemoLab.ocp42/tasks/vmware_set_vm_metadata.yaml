@@ -36,7 +36,7 @@
         vapp_properties:
           - id: "guestinfo.ignition.config.data"
             type: string
-            value: "{{ metadata_bootstrap }}"
+            value: "{{ metadata_bootstrap_result.content }}"
             operation: edit
       when: vm_name.find("bootstrap") != -1
       delegate_to: localhost
@@ -55,7 +55,7 @@
         vapp_properties:
           - id: "guestinfo.ignition.config.data"
             type: string
-            value: "{{ metadata_master }}"
+            value: "{{ metadata_master_result.content }}"
             operation: edit
       when: vm_name.find("master") != -1
       delegate_to: localhost
@@ -74,7 +74,7 @@
         vapp_properties:
           - id: "guestinfo.ignition.config.data"
             type: string
-            value: "{{ metadata_worker }}"
+            value: "{{ metadata_worker_result.content }}"
             operation: edit
       when: vm_name.find("worker") != -1
       delegate_to: localhost

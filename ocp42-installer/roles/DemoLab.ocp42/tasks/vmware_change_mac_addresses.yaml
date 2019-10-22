@@ -1,0 +1,15 @@
+  - name: Change network adapter settings of virtual machine
+    vmware_guest_network:
+      hostname: "{{ vsphere_server }}"
+      username: "{{ vsphere_username }}"
+      password: "{{ vsphere_password }}"
+      datacenter: "{{ vsphere_datacenter }}"
+      validate_certs: no
+      name: bootstrap
+      gather_network_info: false
+      networks:
+        - label: "Network adapter 1"
+          state: present
+          manual_mac: "00:50:56:11:22:33"
+    delegate_to: localhost
+    register: network_info

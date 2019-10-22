@@ -17,6 +17,46 @@
     dest: "{{ ocp4_installer_directory }}"
     remote_src: true
 
-#- name: Execute Openshift Installer
-#  command:
+- name: Execute Openshift Installer
+  command:
+    argv:
+      - "{{ ocp4_installer_directory }}/{{ ocp4_installer_filename }}"
+      - "--dir"
+      - "{{ ocp4_install_files_directory }}"
+      - "create"
+      - "ignition-configs"
+  register: ocp4_installer_output
+
+- name: STDOUT output from openshift_install
+  debug: 
+    var: ocp4_installer_output.stdout_lines
+
+- name: STDERR output from openshift_install
+  debug: 
+    var: ocp4_installer_output.stderr_lines
+
+- name: Create append-bootstrap Ignition file from template
+  template:
+    src: append-bootstrap.j2
+    dest: "{{ ocp4_install_files_directory }}/append-bootstrap.ign"
+    mode: 0644
+
+    #metadata_bootstrap: ""
+    #metadata_master: ""
+    #metadata_worker: ""
+
+- name: Read bootstrap metadata and convert to base64
+  slurp:
+    src: "{{ ocp4_install_files_directory }}/append-bootstrap.ign"
+  register: metadata_bootstrap_result
+
+- name: Read master metadata and convert to base64
+  slurp:
+    src: "{{ ocp4_install_files_directory }}/master.ign"
+  register: metadata_master_result
+
+- name: Read worker metadata and convert to base64
+  slurp:
+    src: "{{ ocp4_install_files_directory }}/worker.ign"
+  register: metadata_worker_result
 

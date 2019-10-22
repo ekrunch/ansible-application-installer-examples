@@ -25,3 +25,15 @@ bootstrap_server_directory="/usr/share/nginx/html/OCP"
 [bastionhost]
 localhost ansible_connection=local
 
+[bootstrap]
+bootstrap.internal.yourdomain.com mac_address="00:50:56:11:11:11"
+
+[masters]
+master1.internal.yourdomain.com mac_address="00:50:56:11:22:11"
+master2.internal.yourdomain.com mac_address="00:50:56:11:22:22"
+master3.internal.yourdomain.com mac_address="00:50:56:11:22:33"
+
+[workers]
+worker1.internal.yourdomain.com mac_address="00:50:56:11:33:11"
+worker1.internal.yourdomain.com mac_address="00:50:56:11:33:22"
+worker1.internal.yourdomain.com mac_address="00:50:56:11:33:33"

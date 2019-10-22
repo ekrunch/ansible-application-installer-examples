@@ -41,9 +41,9 @@ pull_secret: '{"auths": ...}'
 ssh_key: 'ssh-ed25519 AAAA...'
 
 # Web Server URL (for hosting the bootstrap.ign)
-bootstrap_url_server: "https://webserver.internal.yourdomain.com/OCP/bootstrap.ign"
-bootstrap_server_name: "webserver.internal.yourdomain.com"
-bootstrap_server_directory: "/usr/share/nginx/html/OCP"
+bootstrap_url_server_name: "webserver.internal.yourdomain.com"
+bootstrap_url_server_directory: "/usr/share/nginx/html/OCP"
+bootstrap_url: "https://webserver.internal.yourdomain.com/OCP/bootstrap.ign"
 
 # Node creation defaults
 node_memory_mb: 32768

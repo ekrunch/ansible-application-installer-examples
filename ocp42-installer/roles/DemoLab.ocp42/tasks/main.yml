@@ -6,9 +6,27 @@
 
 # Add section to set base64 variablees
 
-# TODO: Currently disabled as the VMware Deploy OVF module doesn't seem to like the OCP OVA. Could be my cluster too so feel free to comment.
+# TODO: Currently disabled as the VMware Deploy OVF module doesn't seem to like the OCP OVA. 
+# Could be my cluster too so feel free to comment.
 #  - name: Create template in VMware
 #    import_tasks: vmware_create_template.yml
 
-#  - name: Create VMs and set metadata
-#    import_tasks: create_cluster.yaml
+  - include_tasks: vmware_remove_vms.yaml
+    with_items: "{{ vms }}"
+    loop_control:
+      loop_var: vm_name
+
+  - include_tasks: vmware_create_vms.yaml
+    with_items: "{{ vms }}"
+    loop_control:
+      loop_var: vm_name
+
+  - include_tasks: vmware_set_vm_metadata.yaml
+    with_items: "{{ vms }}"
+    loop_control:
+      loop_var: vm_name
+  
+      #  - include_tasks: vmware_change_mac_addresses.yaml
+      #    with_items: "{{ vms }}"
+      #    loop_control:
+        #      loop_var: vm_name

@@ -1,0 +1,32 @@
+---
+- hosts: OSEv4
+  gather_facts: no
+  tasks:
+
+    - name: Get Bootstrap
+      debug:
+        msg: "{{ item }} - {{ hostvars[item].mac_address }}"
+      loop:
+        "{{ groups['bootstrap'] }}"
+
+    - debug:
+        msg: "Total Bootstrap : {{ groups['bootstrap'] | length }}"
+
+    - name: Get Masters
+      debug:
+        msg: "{{ item }} - {{ hostvars[item].mac_address }}"
+      loop:
+        "{{ groups['masters'] }}"
+
+    - debug:
+        msg: "Total Masters : {{ groups['masters'] | length }}"
+
+    - name: Get Workers
+      debug:
+        msg: "{{ item }} - {{ hostvars[item].mac_address }}"
+      loop:
+        "{{ groups['workers'] }}"
+
+    - debug:
+        msg: "Total Workers : {{ groups['workers'] | length }}"
+
