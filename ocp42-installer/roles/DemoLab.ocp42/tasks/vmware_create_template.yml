@@ -17,7 +17,7 @@
         password: '{{ vsphere_password }}'
         datacenter: '{{ vsphere_datacenter }}'
         datastore: '{{ vsphere_datastore }}'
-        esxi_hostname: '{{ esxi_hostname }}'
+        #esxi_hostname: '{{ esxi_hostname }}'
         name: '{{ rhcos_template_name }}'
         folder: '{{ ocp_cluster_folder }}'
         validate_certs: False

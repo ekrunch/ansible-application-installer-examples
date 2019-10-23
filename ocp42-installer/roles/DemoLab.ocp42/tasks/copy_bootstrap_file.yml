@@ -1,0 +1,10 @@
+- name: Create web files directory if it doesn't exist
+  file:
+    path: "{{ hostvars[inventory_hostname].files_directory }}"
+    state: directory
+    mode: 0755
+
+- name: Copy bootstrap.ign to web server
+  copy:
+    src: "{{ ocp4_install_files_directory }}/bootstrap.ign"
+    dest: "{{ hostvars[inventory_hostname].files_directory }}"

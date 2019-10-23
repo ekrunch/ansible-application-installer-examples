@@ -1,5 +1,6 @@
 [OSEv4:children]
 bastionhost
+bootstrapwebservers
 
 [OSEv4:vars]
 base_domain="internal.yourdomain.com"
@@ -10,17 +11,12 @@ vsphere_username="administrator@internal.yourdomain.com"
 vsphere_password="test123"
 vsphere_datacenter="datacenter"
 vsphere_datastore="datastore"
-esxi_hostname="esxi1.inernal.yourdomain.com"
-
-mac_address_list_destination_filename="./foot.txt"
 
 pull_secret='{"auths": ...}'
 
 ssh_key='ssh-ed25519 AAAA...'
 
-bootstrap_url_server="https://webserver.internal.yourdomain.com/OCP/bootstrap.ign"
-bootstrap_server_name="webserver.internal.yourdomain.com"
-bootstrap_server_directory="/usr/share/nginx/html/OCP"
+bootstrap_url="http://webserver.internal.yourdomain.com/ocp/bootstrap.ign"
 
 [bastionhost]
 localhost ansible_connection=local
@@ -35,5 +31,8 @@ master3.internal.yourdomain.com mac_address="00:50:56:11:22:33"
 
 [workers]
 worker1.internal.yourdomain.com mac_address="00:50:56:11:33:11"
-worker1.internal.yourdomain.com mac_address="00:50:56:11:33:22"
-worker1.internal.yourdomain.com mac_address="00:50:56:11:33:33"
+worker2.internal.yourdomain.com mac_address="00:50:56:11:33:22"
+worker3.internal.yourdomain.com mac_address="00:50:56:11:33:33"
+
+[bootstrapwebservers]
+webserver.internal.yourdomain.com files_directory="/usr/share/nginx/html/OCP"

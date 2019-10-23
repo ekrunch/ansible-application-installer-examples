@@ -5,11 +5,11 @@
       password: "{{ vsphere_password }}"
       datacenter: "{{ vsphere_datacenter }}"
       validate_certs: no
-      name: bootstrap
+      name: "{{ vm_name }}"
       gather_network_info: false
       networks:
         - label: "Network adapter 1"
           state: present
-          manual_mac: "00:50:56:11:22:33"
+          manual_mac: "{{ hostvars[vm_name].mac_address }}"
     delegate_to: localhost
     register: network_info

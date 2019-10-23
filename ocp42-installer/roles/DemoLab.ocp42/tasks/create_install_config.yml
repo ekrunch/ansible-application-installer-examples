@@ -5,6 +5,11 @@
   with_items:
     - "{{ ocp4_install_file_fullname }}"
 
+- name: Count nodes for install-config
+  set_fact:
+    cluster_master_replicas: "{{ groups['masters'] | length }}"
+    cluster_worker_replicas: "{{ groups['workers'] | length }}"
+
 - name: Create openshift-install install-config file from template
   template:
     src: install-config.yml.j2
@@ -40,10 +45,6 @@
     src: append-bootstrap.j2
     dest: "{{ ocp4_install_files_directory }}/append-bootstrap.ign"
     mode: 0644
-
-    #metadata_bootstrap: ""
-    #metadata_master: ""
-    #metadata_worker: ""
 
 - name: Read bootstrap metadata and convert to base64
   slurp:

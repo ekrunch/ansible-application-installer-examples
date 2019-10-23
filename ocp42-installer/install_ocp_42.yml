@@ -3,7 +3,6 @@
   gather_facts: no
   tasks:
 
-    - name: Invoke OCP 4.2 installer role
-      import_role:
-        name: DemoLab.ocp42
-
+  - name: Invoke OCP 4.2 installer role
+    import_role:
+      name: DemoLab.ocp42

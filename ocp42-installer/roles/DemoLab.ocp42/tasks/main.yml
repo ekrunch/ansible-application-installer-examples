@@ -1,32 +1,8 @@
-  - name: Download and validate installer
-    import_tasks: download_installer.yml
+  - name: Call tasks for bastion hosts
+    import_tasks: bastionhost.yml
+    when: "inventory_hostname in groups['bastionhost']"
 
-  - name: Create installer configuration files
-    import_tasks: create_install_config.yml
+  - name: Call tasks for bootstrap webservers
+    import_tasks: copy_bootstrap_file.yml
+    when: "inventory_hostname in groups['bootstrapwebservers']"
 
-# Add section to set base64 variablees
-
-# TODO: Currently disabled as the VMware Deploy OVF module doesn't seem to like the OCP OVA. 
-# Could be my cluster too so feel free to comment.
-#  - name: Create template in VMware
-#    import_tasks: vmware_create_template.yml
-
-  - include_tasks: vmware_remove_vms.yaml
-    with_items: "{{ vms }}"
-    loop_control:
-      loop_var: vm_name
-
-  - include_tasks: vmware_create_vms.yaml
-    with_items: "{{ vms }}"
-    loop_control:
-      loop_var: vm_name
-
-  - include_tasks: vmware_set_vm_metadata.yaml
-    with_items: "{{ vms }}"
-    loop_control:
-      loop_var: vm_name
-  
-      #  - include_tasks: vmware_change_mac_addresses.yaml
-      #    with_items: "{{ vms }}"
-      #    loop_control:
-        #      loop_var: vm_name

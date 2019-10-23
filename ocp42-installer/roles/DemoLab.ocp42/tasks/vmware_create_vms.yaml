@@ -1,4 +1,4 @@
-    - name: Deploy OCP 4.2 VMs from RHCOS template
+    - name: Deploy OCP 4.2 VMs from RHCOS template - Deploying {{ vm_name }}
       vmware_guest:
         hostname: "{{ vsphere_server }}"
         username: "{{ vsphere_username }}"

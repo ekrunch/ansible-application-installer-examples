@@ -30,3 +30,12 @@
     - debug:
         msg: "Total Workers : {{ groups['workers'] | length }}"
 
+    - name: Get All
+      debug:
+        msg: "{{ item }} - {{ hostvars[item].mac_address }}"
+      loop:
+        "{{ query('inventory_hostnames', 'bootstrap:workers:masters', wantlist=True) }}"
+
+    - debug:
+        msg: "Total Nodes : {{ query('inventory_hostnames', 'bootstrap:workers:masters', wantlist=True) | length }}"
+

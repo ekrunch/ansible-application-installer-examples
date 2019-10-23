@@ -41,29 +41,13 @@ pull_secret: '{"auths": ...}'
 ssh_key: 'ssh-ed25519 AAAA...'
 
 # Web Server URL (for hosting the bootstrap.ign)
-bootstrap_url_server_name: "webserver.internal.yourdomain.com"
-bootstrap_url_server_directory: "/usr/share/nginx/html/OCP"
-bootstrap_url: "https://webserver.internal.yourdomain.com/OCP/bootstrap.ign"
+bootstrap_url: "https://webserver.internal.yourdomain.com/ocp/bootstrap.ign"
 
 # Node creation defaults
 node_memory_mb: 32768
 node_num_cpus: 8
 node_num_cpu_cores_per_socket: 4
 
-# Cluster node counts
+# Cluster node counts - Will be overwritten based on inventory
 cluster_master_replicas: 3
-cluster_worker_replicas: 3
-
-metadata_bootstrap: ""
-metadata_master: ""
-metadata_worker: ""
-
-# Hopefully removing this soon and going to an inventory based set up
-vms:
-  - bootstrap
-  - master1
-  - master2
-  - master3
-  - worker1
-  - worker2
-  - worker3
+cluster_worker_replicas: 0
