@@ -39,6 +39,9 @@ ocp_cluster_folder: "ocp4"
 rhcos_template_name: "RHCOS"
 rhcos_template_vm_network: "VM Network"
 
+# Optiions are "eagerZeroedThick, thin, thick"
+vmware_disk_provisioning: "eagerZeroedThick"
+
 # Pull secret is obtained from try.openshift.com
 pull_secret: '{"auths": ...}'
 

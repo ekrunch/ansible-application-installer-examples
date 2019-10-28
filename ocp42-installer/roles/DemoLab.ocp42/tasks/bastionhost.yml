@@ -1,3 +1,4 @@
+# TODO: Add validate certs option in inventory / defaults
 
   - name: Download and validate installer
     import_tasks: download_installer.yml
