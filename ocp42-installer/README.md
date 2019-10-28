@@ -8,7 +8,7 @@ Demo for installing Openshift 4.2 on VMware (vCenter required).
 This process automates some of the User Provisioned Installation (UPI) for VMware documented [here](https://docs.openshift.com/container-platform/4.2/installing/installing_vsphere/installing-vsphere.html#installation-dns-user-infra_installing-vsphere)
 
 Prerequisites:
-- Please create the RHCOS template yourself (as per OCP installation instructions) before running these as I'm having some challenges with vmware_deploy_ovf
+- Please create the RHCOS template yourself (as per OCP installation instructions) if the automatic deployment routine doesn't work. You can set deploy_ova to false in the inventory to skip this step.
 - DNS entries should be set up already (A records and SRV records are required, I recommend A/PTR for all of the worker nodes as well)
 - Load Balancer should be set up already. Example configurations for HAProxy are available in my openshift_scripts repo [here](https://github.com/ekrunch/openshift_scripts/tree/master/4.1/UPI)
 - Static DHCP mappings are used in this example so set those up and then put the MAC Addresses in the inventory file. Note that the boot process for OCP 4 requires DHCP so you'll need it even if you change the IP settings manually later.

@@ -2,6 +2,11 @@
 # This is the directory where the openshift-install file is located
 # The install-files-directory will be passed to the installer
 # and will contain the resulting ignition files and base64 conversions
+ocp4_client_directory: "/home/presutti/bin"
+ocp4_client_installer_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux-4.2.0.tar.gz"
+ocp4_client_archive_name: "{{ ocp4_client_installer_url | basename }}"
+ocp4_client_sha_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/sha256sum.txt"
+
 ocp4_installer_directory: "/home/presutti/ocp"
 ocp4_installer_filename: "openshift-install"
 ocp4_install_config_name: "install-config.yaml"
@@ -16,6 +21,7 @@ rhcos_ova_archive_name: "{{ rhcos_ova_url | basename }}"
 rhcos_ova_sha_url: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.2/latest/sha256sum.txt"
 
 # Some combined variable names to make the later tasks easier to write :)
+ocp4_client_file_fullarchivename: "{{ ocp4_installer_directory }}/{{ ocp4_client_archive_name }}"
 ocp4_install_file_fullname: "{{ ocp4_install_files_directory }}/{{ ocp4_install_config_name}}"
 ocp4_installer_file_fullarchivename: "{{ ocp4_installer_directory }}/{{ ocp4_installer_archive_name }}"
 rhcos_ova_file_fullname: "{{ ocp4_installer_directory }}/{{ rhcos_ova_archive_name }}"

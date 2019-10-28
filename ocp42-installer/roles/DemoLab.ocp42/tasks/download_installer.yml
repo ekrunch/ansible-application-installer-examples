@@ -1,3 +1,4 @@
+
 - name: Create the OCP installation dir if it doesn't exist
   file:
     path: "{{ ocp4_installer_directory }}"
@@ -22,8 +23,16 @@
     dest: "{{ ocp4_installer_file_fullarchivename }}"
     checksum: "sha256:{{ ocp4_installer_sha_url }}"
 
+- name: Download the openshift client
+  get_url:
+    url: "{{ ocp4_client_installer_url }}"
+    dest: "{{ ocp4_client_file_fullarchivename }}"
+    checksum: "sha256:{{ ocp4_client_sha_url }}"
+  when: "deploy_client"
+
 - name: Download the CoreOS OVA
   get_url:
     url: "{{ rhcos_ova_url }}"
     dest: "{{ rhcos_ova_file_fullname }}"
     checksum: "sha256:{{ rhcos_ova_sha_url }}"
+  when: "deploy_ova"

@@ -12,6 +12,14 @@ vsphere_password="test123"
 vsphere_datacenter="datacenter"
 vsphere_datastore="datastore"
 
+# These variables control whether or not the role will deploy the OVA 
+# diretly to VMware and whether or not the role will deploy the client to the bastionhost
+deploy_ova=True
+deploy_client=True
+
+ocp4_client_directory="/home/youruser/bin"
+ocp4_installer_directory="/home/youruser/ocp"
+
 pull_secret='{"auths": ...}'
 
 ssh_key='ssh-ed25519 AAAA...'
@@ -33,6 +41,7 @@ master3.internal.yourdomain.com mac_address="00:50:56:11:22:33"
 worker1.internal.yourdomain.com mac_address="00:50:56:11:33:11"
 worker2.internal.yourdomain.com mac_address="00:50:56:11:33:22"
 worker3.internal.yourdomain.com mac_address="00:50:56:11:33:33"
+worker4.internal.yourdomain.com mac_address="00:50:56:11:33:44"
 
 [bootstrapwebservers]
-webserver.internal.yourdomain.com files_directory="/usr/share/nginx/html/OCP"
+webserver.internal.yourdomain.com files_directory="/usr/share/nginx/html/ocp"

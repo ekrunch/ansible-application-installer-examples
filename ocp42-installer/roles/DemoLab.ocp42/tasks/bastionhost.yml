@@ -5,32 +5,37 @@
   - name: Create installer configuration files
     import_tasks: create_install_config.yml
 
-# TODO: Currently disabled as the VMware Deploy OVF module doesn't seem to like the OCP OVA. 
-# Could be my cluster too so feel free to comment.
-#  - name: Create template in VMware
-#    import_tasks: vmware_create_template.yml
+  - name: Create template in VMware
+    import_tasks: vmware_create_template.yml
+    when: "deploy_ova"
 
   - name: Setup Host List
     set_fact:
       vm_list: "{{ query('inventory_hostnames', 'bootstrap:masters:workers', wantlist=True) }}"
 
-  - include_tasks: vmware_remove_vms.yaml
+  - include_tasks: vmware_remove_vms.yml
     with_items: "{{ vm_list }}"
     loop_control:
       loop_var: vm_name
 
-  - include_tasks: vmware_create_vms.yaml
+  - include_tasks: vmware_create_vms.yml
     with_items: "{{ vm_list }}"
     loop_control:
       loop_var: vm_name
 
-  - include_tasks: vmware_set_vm_metadata.yaml
+  - include_tasks: vmware_set_vm_metadata.yml
     with_items: "{{ vm_list }}"
     loop_control:
       loop_var: vm_name
   
-  - include_tasks: vmware_change_mac_addresses.yaml
+  - include_tasks: vmware_change_mac_addresses.yml
     with_items: "{{ vm_list }}"
     loop_control:
       loop_var: vm_name
 
+  - name: Extract Openshift Client
+    unarchive:
+      src: "{{ ocp4_client_file_fullarchivename }}"
+      dest: "{{ ocp4_client_directory }}"
+      remote_src: true
+    when: "deploy_client"
