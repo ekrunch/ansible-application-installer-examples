@@ -34,6 +34,12 @@
     loop_control:
       loop_var: vm_name
 
+  - name: Create client files directory if it doesn't exist
+    file:
+      path: "{{ ocp4_client_directory }}"
+      state: directory
+      mode: 0755
+
   - name: Extract Openshift Client
     unarchive:
       src: "{{ ocp4_client_file_fullarchivename }}"
