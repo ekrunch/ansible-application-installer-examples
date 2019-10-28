@@ -1,6 +1,6 @@
 ---
-- hosts: all
-  gather_facts: false
+- hosts: localhost
+  gather_facts: no
   tasks:
 
     - name: Get VCenter / ESXi info

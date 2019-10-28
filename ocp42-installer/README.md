@@ -36,3 +36,9 @@ The following steps are performed (This is all still WIP so some of this might n
 Review roles/DemoLab.ocp42/defaults/main.yml for variables that can be changed to make this example work in another environment.
 
 To use this, copy the inventory.sample file to custom/inventory (this folder is ignored by git) and customize it to your environment.
+
+After inventory customization is completed, use the following playbooks / scripts
+- get_hosts.sh - Use this script to determine if your inventory is working as expected. It will list the hosts in inventory by group
+- get_vmware_info.sh - Use this script to gather information about the VMware cluster and test connectivity
+- install_ocp_42.sh - This triggers the installation for OCP 4.2 via the role
+
