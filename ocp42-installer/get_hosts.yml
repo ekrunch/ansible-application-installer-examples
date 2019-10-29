@@ -34,8 +34,8 @@
       debug:
         msg: "{{ item }} - {{ hostvars[item].mac_address }}"
       loop:
-        "{{ query('inventory_hostnames', 'bootstrap:workers:masters', wantlist=True) }}"
+        "{{ query('inventory_hostnames', 'bootstrap:masters:workers', wantlist=True) }}"
 
     - debug:
-        msg: "Total Nodes : {{ query('inventory_hostnames', 'bootstrap:workers:masters', wantlist=True) | length }}"
+        msg: "Total Nodes : {{ query('inventory_hostnames', 'bootstrap:masters:workers', wantlist=True) | length }}"
 

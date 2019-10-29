@@ -3,7 +3,6 @@ baseDomain: '{{ base_domain | mandatory }}'
 compute:
 - hyperthreading: Enabled   
   name: worker
-# This stays as zero for now according to the documentation
   replicas: {{ cluster_worker_replicas | mandatory }}
 controlPlane:
   hyperthreading: Enabled   

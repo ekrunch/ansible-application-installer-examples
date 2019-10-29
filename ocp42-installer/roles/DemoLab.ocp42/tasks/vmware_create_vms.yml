@@ -10,6 +10,7 @@
         template: "{{ rhcos_template_name }}"
         state: "poweredoff"
         name: "{{ vm_name }}"
+        convert: "{{ vmware_disk_provisioning }}"
         hardware:
           memory_mb: "{{ node_memory_mb }}"
           num_cpus: "{{ node_num_cpus }}"

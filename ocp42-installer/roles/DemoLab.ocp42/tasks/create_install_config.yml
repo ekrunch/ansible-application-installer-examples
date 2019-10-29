@@ -12,7 +12,7 @@
 
 - name: Create openshift-install install-config file from template
   template:
-    src: install-config.yml.j2
+    src: "{{ template_install_config }}"
     dest: "{{ ocp4_install_file_fullname }}"
     mode: 0644
 
@@ -42,7 +42,7 @@
 
 - name: Create append-bootstrap Ignition file from template
   template:
-    src: append-bootstrap.j2
+    src: "{{ template_append_bootstrap }}"
     dest: "{{ ocp4_install_files_directory }}/append-bootstrap.ign"
     mode: 0644
 
