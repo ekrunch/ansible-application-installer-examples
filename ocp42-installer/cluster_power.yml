@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+
+    - name: Power Down Guests
+      vmware_guest_powerstate:
+        hostname: '{{ vsphere_server }}'
+        username: '{{ vsphere_username }}'
+        password: '{{ vsphere_password }}'
+        validate_certs: no
+        state: '{{ VM_POWERSTATE | mandatory }}'
+        name: '{{ item }}'
+      delegate_to: localhost
+      ignore_errors: yes
+      loop:
+        "{{ query('inventory_hostnames', 'masters:workers', wantlist=True) }}"
+
