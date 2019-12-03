@@ -3,17 +3,17 @@
 # The install-files-directory will be passed to the installer
 # and will contain the resulting ignition files and base64 conversions
 ocp4_client_directory: "/home/presutti/bin"
-ocp4_client_installer_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux-4.2.0.tar.gz"
+ocp4_client_installer_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.2.9/openshift-client-linux-4.2.9.tar.gz"
 ocp4_client_archive_name: "{{ ocp4_client_installer_url | basename }}"
-ocp4_client_sha_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/sha256sum.txt"
+ocp4_client_sha_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.2.9/sha256sum.txt"
 
 ocp4_installer_directory: "/home/presutti/ocp"
 ocp4_installer_filename: "openshift-install"
 ocp4_install_config_name: "install-config.yaml"
 ocp4_install_files_directory: "{{ ocp4_installer_directory }}/data"
-ocp4_installer_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-install-linux-4.2.0.tar.gz"
+ocp4_installer_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.2.9/openshift-install-linux-4.2.9.tar.gz"
 ocp4_installer_archive_name: "{{ ocp4_installer_url | basename }}"
-ocp4_installer_sha_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/sha256sum.txt"
+ocp4_installer_sha_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.2.9/sha256sum.txt"
 
 # RHCOS OVA image
 rhcos_ova_url: 'https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.2/latest/rhcos-4.2.0-x86_64-vmware.ova'

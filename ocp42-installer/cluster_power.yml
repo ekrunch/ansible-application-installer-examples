@@ -3,7 +3,7 @@
   gather_facts: no
   tasks:
 
-    - name: Power Down Guests
+    - name: "Set powerstate to {{ VM_POWERSTATE }}"
       vmware_guest_powerstate:
         hostname: '{{ vsphere_server }}'
         username: '{{ vsphere_username }}'
