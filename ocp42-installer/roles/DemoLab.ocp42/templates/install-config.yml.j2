@@ -1,11 +1,11 @@
 apiVersion: v1
 baseDomain: '{{ base_domain | mandatory }}'
 compute:
-- hyperthreading: Enabled   
+- hyperthreading: Enabled
   name: worker
   replicas: {{ cluster_worker_replicas | mandatory }}
 controlPlane:
-  hyperthreading: Enabled   
+  hyperthreading: Enabled
   name: master
   replicas: {{ cluster_master_replicas | mandatory }}
 metadata:
@@ -17,5 +17,6 @@ platform:
     password: '{{ vsphere_password }}'
     datacenter: '{{ vsphere_datacenter }}'
     defaultDatastore: '{{ vsphere_datastore }}'
+fips: false
 pullSecret: '{{ pull_secret | mandatory }}'
 sshKey: '{{ ssh_key }}'

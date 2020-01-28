@@ -1,5 +1,15 @@
 # TODO: Add validate certs option in inventory / defaults
 
+  - name: Setup Cluster Name Variable if Present
+    set_fact:
+      vsphere_use_cluster: True
+    when: "vsphere_cluster | length > 0"
+
+  - name: Setup ESXi Hostname Variable if Present
+    set_fact:
+      vsphere_use_esxi_hostname: True
+    when: "vsphere_esxi_hostname | length > 0"
+
   - name: Download and validate installer
     import_tasks: download_installer.yml
 
@@ -14,18 +24,68 @@
     set_fact:
       vm_list: "{{ query('inventory_hostnames', 'bootstrap:masters:workers', wantlist=True) }}"
 
+  - name: Setup Boostrap Host List
+    set_fact:
+      vm_bootstrap_list: "{{ query('inventory_hostnames', 'bootstrap', wantlist=True) }}"
+
+  - name: Setup Master Host List
+    set_fact:
+      vm_master_list: "{{ query('inventory_hostnames', 'masters', wantlist=True) }}"
+
+  - name: Setup Worker Host List
+    set_fact:
+      vm_worker_list: "{{ query('inventory_hostnames', 'workers', wantlist=True) }}"
+
   - include_tasks: vmware_remove_vms.yml
     with_items: "{{ vm_list }}"
     loop_control:
       loop_var: vm_name
 
   - include_tasks: vmware_create_vms.yml
-    with_items: "{{ vm_list }}"
+    vars:
+      primary_disk_size: "20"
+      disk_provisioning: "thin"
+    with_items: "{{ vm_bootstrap_list }}"
+    loop_control:
+      loop_var: vm_name
+
+  - include_tasks: vmware_create_vms.yml
+    vars:
+      primary_disk_size: "{{ node_master_disk_size_in_gb }}"
+      disk_provisioning: "{{ vmware_disk_provisioning }}"
+    with_items: "{{ vm_master_list }}"
+    loop_control:
+      loop_var: vm_name
+
+  - include_tasks: vmware_create_vms.yml
+    vars:
+      primary_disk_size: "{{ node_worker_disk_size_in_gb }}"
+      disk_provisioning: "{{ vmware_disk_provisioning }}"
+    with_items: "{{ vm_worker_list }}"
     loop_control:
       loop_var: vm_name
 
   - include_tasks: vmware_set_vm_metadata.yml
-    with_items: "{{ vm_list }}"
+    vars:
+      vm_metadata_type: "Bootstrap"
+      vm_metadata_data: "{{ metadata_bootstrap_result.content }}"
+    with_items: "{{ vm_bootstrap_list }}"
+    loop_control:
+      loop_var: vm_name
+
+  - include_tasks: vmware_set_vm_metadata.yml
+    vars:
+      vm_metadata_type: "Master"
+      vm_metadata_data: "{{ metadata_master_result.content }}"
+    with_items: "{{ vm_master_list }}"
+    loop_control:
+      loop_var: vm_name
+
+  - include_tasks: vmware_set_vm_metadata.yml
+    vars:
+      vm_metadata_type: "Worker"
+      vm_metadata_data: "{{ metadata_worker_result.content }}"
+    with_items: "{{ vm_worker_list }}"
     loop_control:
       loop_var: vm_name
   
@@ -33,6 +93,22 @@
     with_items: "{{ vm_list }}"
     loop_control:
       loop_var: vm_name
+
+  - include_tasks: vmware_create_disks.yml
+    vars:
+      vm_disk_size: "{{ node_master_extra_disk_size_in_gb }}"
+    with_items: "{{ vm_master_list }}"
+    loop_control:
+      loop_var: vm_name
+    when: "node_master_add_extra_disk"
+
+  - include_tasks: vmware_create_disks.yml
+    vars:
+      vm_disk_size: "{{ node_worker_extra_disk_size_in_gb }}"
+    with_items: "{{ vm_worker_list }}"
+    loop_control:
+      loop_var: vm_name
+    when: "node_worker_add_extra_disk"
 
   - name: Create client files directory if it doesn't exist
     file:

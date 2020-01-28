@@ -11,6 +11,13 @@ vsphere_username="administrator@internal.yourdomain.com"
 vsphere_password="test123"
 vsphere_datacenter="datacenter"
 vsphere_datastore="datastore"
+# The Ansible vmware_guest module documentation states that either a cluster name or hostname is required to be set.
+# Your mileage may vary here so experiment and see what works best
+
+# These parameters are mutually exclusive so set one or the other, but not both!
+#vsphere_cluster="cluster1"
+vsphere_esxi_hostname="hostname1"
+
 
 # These variables control whether or not the role will deploy the OVA 
 # diretly to VMware and whether or not the role will deploy the client to the bastionhost
@@ -25,6 +32,19 @@ pull_secret='{"auths": ...}'
 ssh_key='ssh-ed25519 AAAA...'
 
 bootstrap_url="http://webserver.internal.yourdomain.com/ocp/bootstrap.ign"
+
+# Node creation defaults
+#node_memory_mb=32768
+#node_num_cpus=8
+#node_num_cpu_cores_per_socket=4
+
+node_master_add_extra_disk=True
+node_master_extra_disk_size_in_gb=50
+
+node_worker_add_extra_disk=True
+node_worker_extra_disk_size_in_gb=100
+
+vmware_disk_provisioning="thick"
 
 [bastionhost]
 localhost ansible_connection=local

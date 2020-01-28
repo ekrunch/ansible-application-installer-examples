@@ -5,7 +5,8 @@
         password: "{{ vsphere_password }}"
         datacenter: "{{ vsphere_datacenter }}"
         datastore: "{{ vsphere_datastore }}"
-        #esxi_hostname: "{{ esxi_hostname }}"
+        esxi_hostname: "{{ vsphere_esxi_hostname if vsphere_use_esxi_hostname else omit}}"
+        cluster: "{{ vsphere_cluster if vsphere_use_cluster else omit}}"
         validate_certs: False
         folder: "{{ ocp_cluster_folder }}"
         state: "present"
@@ -21,14 +22,15 @@
             operation: edit
       delegate_to: localhost
 
-    - name: "Deploy Bootstrap metadata on {{ vm_name }}"
+    - name: "Deploy {{ vm_metadata_type }} metadata on {{ vm_name }}"
       vmware_guest:
         hostname: "{{ vsphere_server }}"
         username: "{{ vsphere_username }}"
         password: "{{ vsphere_password }}"
         datacenter: "{{ vsphere_datacenter }}"
         datastore: "{{ vsphere_datastore }}"
-        #esxi_hostname: "{{ esxi_hostname }}"
+        esxi_hostname: "{{ vsphere_esxi_hostname if vsphere_use_esxi_hostname else omit}}"
+        cluster: "{{ vsphere_cluster if vsphere_use_cluster else omit}}"
         validate_certs: False
         folder: "{{ ocp_cluster_folder }}"
         state: "present"
@@ -36,45 +38,23 @@
         vapp_properties:
           - id: "guestinfo.ignition.config.data"
             type: string
-            value: "{{ metadata_bootstrap_result.content }}"
+            value: "{{ vm_metadata_data }}"
             operation: edit
-      when: "vm_name in groups['bootstrap']"
       delegate_to: localhost
 
-    - name: "Deploy Master metadata on {{ vm_name }}"
+    - name: "Setting Guest OS ID on {{ vm_name }} to {{ vmware_guest_os_id }}"
       vmware_guest:
         hostname: "{{ vsphere_server }}"
         username: "{{ vsphere_username }}"
         password: "{{ vsphere_password }}"
         datacenter: "{{ vsphere_datacenter }}"
-        #esxi_hostname: "{{ esxi_hostname }}"
+        datastore: "{{ vsphere_datastore }}"
+        esxi_hostname: "{{ vsphere_esxi_hostname if vsphere_use_esxi_hostname else omit}}"
+        cluster: "{{ vsphere_cluster if vsphere_use_cluster else omit}}"
         validate_certs: False
+        guest_id: "{{ vmware_guest_os_id }}"
         folder: "{{ ocp_cluster_folder }}"
         state: "present"
         name: "{{ vm_name }}"
-        vapp_properties:
-          - id: "guestinfo.ignition.config.data"
-            type: string
-            value: "{{ metadata_master_result.content }}"
-            operation: edit
-      when: "vm_name in groups['masters']"
       delegate_to: localhost
 
-    - name: "Deploy Worker metadata on {{ vm_name }}"
-      vmware_guest:
-        hostname: "{{ vsphere_server }}"
-        username: "{{ vsphere_username }}"
-        password: "{{ vsphere_password }}"
-        datacenter: "{{ vsphere_datacenter }}"
-        #esxi_hostname: "{{ esxi_hostname }}"
-        validate_certs: False
-        folder: "{{ ocp_cluster_folder }}"
-        state: "present"
-        name: "{{ vm_name }}"
-        vapp_properties:
-          - id: "guestinfo.ignition.config.data"
-            type: string
-            value: "{{ metadata_worker_result.content }}"
-            operation: edit
-      when: "vm_name in groups['workers']"
-      delegate_to: localhost
