@@ -19,15 +19,20 @@ Domain Name : demolab.com
 - bootstrap.ocp4.demolab.com - 172.16.31.50
 
 **Load Balancer Configuration**
+
 HAProxy Node running RHEL 8
+
 IP Address : 172.16.31.100
+
 Ports
+
 - TCP 6443  - k8s API - Pointing to bootstrap and master[1-3]
 - TCP 22623 - CoreOS Ignition - Pointing to bootstrap and master[1-3]
 - TCP 80    - Router Ingress (Insecure) - Pointing to master[1-3] and worker[1-3] (It's done this way because the ingress can initially deploy on master nodes)
 - TCP 443   - Router Ingress (Secure) - Pointing to master[1-3] and worker[1-3]
 
 **DNS Records**
+
 _A Records_
 - etcd-0.ocp4.demolab.com    - 172.16.31.10
 - etcd-1.ocp4.demolab.com    - 172.16.31.11
