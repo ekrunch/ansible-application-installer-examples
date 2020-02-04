@@ -19,6 +19,7 @@ Domain Name : demolab.com
 - bootstrap.ocp4.demolab.com - 172.16.31.50
 
 **Load Balancer Configuration**
+Example configuration [here](https://github.com/ekrunch/openshift_scripts/tree/master/4.1/UPI)
 
 HAProxy Node running RHEL 8
 
