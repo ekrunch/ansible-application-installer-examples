@@ -29,46 +29,44 @@ Ports
 
 **DNS Records**
 _A Records_
-etcd-0.ocp4.demolab.com    - 172.16.31.10
-etcd-1.ocp4.demolab.com    - 172.16.31.11
-etcd-2.ocp4.demolab.com    - 172.16.31.12
+- etcd-0.ocp4.demolab.com    - 172.16.31.10
+- etcd-1.ocp4.demolab.com    - 172.16.31.11
+- etcd-2.ocp4.demolab.com    - 172.16.31.12
 
-worker1.ocp4.demolab.com   - 172.16.31.20
-worker2.ocp4.demolab.com   - 172.16.31.21
-worker3.ocp4.demolab.com   - 172.16.31.22
+- worker1.ocp4.demolab.com   - 172.16.31.20
+- worker2.ocp4.demolab.com   - 172.16.31.21
+- worker3.ocp4.demolab.com   - 172.16.31.22
 
 _Optional : Helpful for debugging / later connectivity_
-master1.ocp4.demolab.com   - 172.16.31.10
-master2.ocp4.demolab.com   - 172.16.31.11
-master3.ocp4.demolab.com   - 172.16.31.12
+- master1.ocp4.demolab.com   - 172.16.31.10
+- master2.ocp4.demolab.com   - 172.16.31.11
+- master3.ocp4.demolab.com   - 172.16.31.12
 
-bootstrap.ocp4.demolab.com - 172.16.31.50
+- bootstrap.ocp4.demolab.com - 172.16.31.50
 
-api.ocp4.demolab.com       - 172.16.31.100 - Points to the load balancer for the 6443 service
-api-int.ocp4.demolab.com   - 172.16.31.100 - Points to the load balancer for the 22623 service
+- api.ocp4.demolab.com       - 172.16.31.100 - Points to the load balancer for the 6443 service
+- api-int.ocp4.demolab.com   - 172.16.31.100 - Points to the load balancer for the 22623 service
 
 _SRV Records_
-_etcd-server-ssl._tcp.ocp4.demolab.com,etcd-0.ocp4.demolab.com,2380,0,10",
-_etcd-server-ssl._tcp.ocp4.demolab.com,etcd-1.ocp4.demolab.com,2380,0,10",
-_etcd-server-ssl._tcp.ocp4.demolab.com,etcd-2.ocp4.demolab.com,2380,0,10"
+- _etcd-server-ssl._tcp.ocp4.demolab.com,etcd-0.ocp4.demolab.com,2380,0,10",
+- _etcd-server-ssl._tcp.ocp4.demolab.com,etcd-1.ocp4.demolab.com,2380,0,10",
+- _etcd-server-ssl._tcp.ocp4.demolab.com,etcd-2.ocp4.demolab.com,2380,0,10"
 
 _PTR Records_
 I recommend that all hosts have a PTR record. The documentation doesn't say that it's required but I find that it helps with the names that show up in the console and relevant CLI commands.
 
 _Wildcard Records_
-*.apps.ocp4.demolab.com     - Points to the load balancer IP for the 80/443 services
+- *.apps.ocp4.demolab.com     - Points to the load balancer IP for the 80/443 services
 
 **DHCP Reservations**
-172.16.31.50 - bootstrap.internal.demolab.com - MAC address="00:50:56:11:11:11"
+- 172.16.31.50 - bootstrap.internal.demolab.com - MAC address="00:50:56:11:11:11"
 
 [masters]
-172.16.31.10 - master1.internal.demolab.com - MAC address="00:50:56:11:22:11"
-172.16.31.11 - master2.internal.demolab.com - MAC address="00:50:56:11:22:22"
-172.16.31.12 - master3.internal.demolab.com - MAC address="00:50:56:11:22:33"
+- 172.16.31.10 - master1.internal.demolab.com - MAC address="00:50:56:11:22:11"
+- 172.16.31.11 - master2.internal.demolab.com - MAC address="00:50:56:11:22:22"
+- 172.16.31.12 - master3.internal.demolab.com - MAC address="00:50:56:11:22:33"
 
 [workers]
-172.16.31.20 - worker1.internal.demolab.com - MAC address="00:50:56:11:33:11"
-172.16.31.21 - worker2.internal.demolab.com - MAC address="00:50:56:11:33:22"
-172.16.31.22 - worker3.internal.demolab.com - MAC address="00:50:56:11:33:33"
-
-
+- 172.16.31.20 - worker1.internal.demolab.com - MAC address="00:50:56:11:33:11"
+- 172.16.31.21 - worker2.internal.demolab.com - MAC address="00:50:56:11:33:22"
+- 172.16.31.22 - worker3.internal.demolab.com - MAC address="00:50:56:11:33:33"
