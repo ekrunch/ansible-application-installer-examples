@@ -9,16 +9,16 @@ In this tutorial, I'll use the following as a configuration example.
 Cluster Name : ocp4
 Domain Name : demolab.com
 
-** IP Addresses **
-master1.ocp4.demolab.com - 172.16.31.10
-master2.ocp4.demolab.com - 172.16.31.11
-master3.ocp4.demolab.com - 172.16.31.12
-worker1.ocp4.demolab.com - 172.16.31.20
-worker2.ocp4.demolab.com - 172.16.31.21
-worker3.ocp4.demolab.com - 172.16.31.22
-bootstrap.ocp4.demolab.com - 172.16.31.50
+**IP Addresses**
+- master1.ocp4.demolab.com - 172.16.31.10
+- master2.ocp4.demolab.com - 172.16.31.11
+- master3.ocp4.demolab.com - 172.16.31.12
+- worker1.ocp4.demolab.com - 172.16.31.20
+- worker2.ocp4.demolab.com - 172.16.31.21
+- worker3.ocp4.demolab.com - 172.16.31.22
+- bootstrap.ocp4.demolab.com - 172.16.31.50
 
-** Load Balancer Configuration **
+**Load Balancer Configuration**
 HAProxy Node running RHEL 8
 IP Address : 172.16.31.100
 Ports
@@ -27,7 +27,7 @@ Ports
 - TCP 80    - Router Ingress (Insecure) - Pointing to master[1-3] and worker[1-3] (It's done this way because the ingress can initially deploy on master nodes)
 - TCP 443   - Router Ingress (Secure) - Pointing to master[1-3] and worker[1-3]
 
-** DNS Records **
+**DNS Records**
 _A Records_
 etcd-0.ocp4.demolab.com    - 172.16.31.10
 etcd-1.ocp4.demolab.com    - 172.16.31.11
@@ -58,7 +58,7 @@ I recommend that all hosts have a PTR record. The documentation doesn't say that
 _Wildcard Records_
 *.apps.ocp4.demolab.com     - Points to the load balancer IP for the 80/443 services
 
-** DHCP Reservations **
+**DHCP Reservations**
 172.16.31.50 - bootstrap.internal.demolab.com - MAC address="00:50:56:11:11:11"
 
 [masters]
