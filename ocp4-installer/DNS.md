@@ -21,16 +21,13 @@ Domain Name : demolab.com
 **Load Balancer Configuration**
 Example configuration [here](https://github.com/ekrunch/openshift_scripts/tree/master/4.1/UPI)
 
-HAProxy Node running RHEL 8
-
-IP Address : 172.16.31.100
-
-Ports
-
-- TCP 6443  - k8s API - Pointing to bootstrap and master[1-3]
-- TCP 22623 - CoreOS Ignition - Pointing to bootstrap and master[1-3]
-- TCP 80    - Router Ingress (Insecure) - Pointing to master[1-3] and worker[1-3] (It's done this way because the ingress can initially deploy on master nodes)
-- TCP 443   - Router Ingress (Secure) - Pointing to master[1-3] and worker[1-3]
+- HAProxy Node running RHEL 8
+- IP Address : 172.16.31.100
+- Ports
+  - TCP 6443  - k8s API - Pointing to bootstrap and master[1-3]
+  - TCP 22623 - CoreOS Ignition - Pointing to bootstrap and master[1-3]
+  - TCP 80    - Router Ingress (Insecure) - Pointing to master[1-3] and worker[1-3] (It's done this way because the ingress can initially deploy on master nodes)
+  - TCP 443   - Router Ingress (Secure) - Pointing to master[1-3] and worker[1-3]
 
 **DNS Records**
 
