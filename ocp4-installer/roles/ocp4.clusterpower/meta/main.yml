@@ -1,7 +1,7 @@
 ---
 galaxy_info:
     author: Ed Presutti
-    description: Install and configure OCP 4.x on vSphere w/ vCenter (automate the UPI process)
+    description: Power a previously built OCP 4 cluster on or off
     company: Ed's Demo Lab
     license: Apache License 2.0
     min_ansible_version: 2.0

@@ -20,6 +20,9 @@ rhcos_ova_url: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos
 rhcos_ova_archive_name: "{{ rhcos_ova_url | basename }}"
 rhcos_ova_sha_url: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.2/4.2.0/sha256sum.txt"
 
+# Purely cosmetic
+ocp4_major_minor_version: "4.2"
+
 # Some combined variable names to make the later tasks easier to write :)
 ocp4_client_file_fullarchivename: "{{ ocp4_installer_directory }}/{{ ocp4_client_archive_name }}"
 ocp4_install_file_fullname: "{{ ocp4_install_files_directory }}/{{ ocp4_install_config_name}}"

@@ -3,6 +3,15 @@
   gather_facts: no
   tasks:
 
-  - name: Invoke OCP 4.2 installer role
+  - name: Invoke OCP 4 installer role
     import_role:
       name: ocp4.install
+
+  - name: Set cluster power state
+    set_fact:
+      VM_POWERSTATE: "powered-on"
+
+  - name: Power on cluster
+    import_role:
+      name: ocp4.clusterpower
+    when: "power_on_cluster_after_build and inventory_hostname in groups['bastionhost']"

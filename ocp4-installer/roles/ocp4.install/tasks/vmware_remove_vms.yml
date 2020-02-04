@@ -1,4 +1,4 @@
-    - name: Remove old OCP 4.2 VMs - Removing {{ vm_name }}
+    - name: Remove old OCP VMs - Removing {{ vm_name }}
       vmware_guest:
         hostname: "{{ vsphere_server }}"
         username: "{{ vsphere_username }}"

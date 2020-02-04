@@ -38,13 +38,19 @@ bootstrap_url="http://webserver.internal.yourdomain.com/ocp/bootstrap.ign"
 #node_num_cpus=8
 #node_num_cpu_cores_per_socket=4
 
+node_master_disk_size_in_gb=50
 node_master_add_extra_disk=True
 node_master_extra_disk_size_in_gb=50
 
+node_worker_disk_size_in_gb=50
 node_worker_add_extra_disk=True
 node_worker_extra_disk_size_in_gb=100
 
 vmware_disk_provisioning="thick"
+
+rhcos_template_vm_network="VM Network"
+
+power_on_cluster_after_build=True
 
 [bastionhost]
 localhost ansible_connection=local
