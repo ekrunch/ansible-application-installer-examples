@@ -33,7 +33,7 @@ The following steps are performed (This is all still WIP so some of this might n
 - Create the relevant load balancer configuration
 - Create the relevant DHCP/DNS configuration
 
-Review roles/DemoLab.ocp42/defaults/main.yml for variables that can be changed to make this example work in another environment.
+Review roles/ocp4.install/defaults/main.yml for variables that can be changed to make this example work in another environment.
 
 To use this, copy the inventory.sample file to custom/inventory (this folder is ignored by git) and customize it to your environment.
 

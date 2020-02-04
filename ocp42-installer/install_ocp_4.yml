@@ -5,4 +5,4 @@
 
   - name: Invoke OCP 4.2 installer role
     import_role:
-      name: DemoLab.ocp42
+      name: ocp4.install
