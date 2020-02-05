@@ -34,19 +34,27 @@ ssh_key='ssh-ed25519 AAAA...'
 bootstrap_url="http://webserver.internal.yourdomain.com/ocp/bootstrap.ign"
 
 # Node creation defaults
-#node_memory_mb=32768
-#node_num_cpus=8
-#node_num_cpu_cores_per_socket=4
+master_node_memory_mb=24576
+master_node_num_cpus=4
+master_node_num_cpu_cores_per_socket=4
 
+worker_node_memory_mb=32768
+worker_node_num_cpus=8
+worker_node_num_cpu_cores_per_socket=4
+
+# Options to add extra disks are in the playbooks but somewhat useless for now and disabled by default.
+# Machine Configuration objects need to be created in order for CoreOS to recognize the disks.
 node_master_disk_size_in_gb=50
-node_master_add_extra_disk=True
+node_master_add_extra_disk=False
 node_master_extra_disk_size_in_gb=50
 
 node_worker_disk_size_in_gb=50
-node_worker_add_extra_disk=True
+node_worker_add_extra_disk=False
 node_worker_extra_disk_size_in_gb=100
 
-vmware_disk_provisioning="thick"
+# Options are "thin, thick, eagerzeroedthick"
+vmware_master_disk_provisioning="thin"
+vmware_worker_disk_provisioning="thin"
 
 rhcos_template_vm_network="VM Network"
 

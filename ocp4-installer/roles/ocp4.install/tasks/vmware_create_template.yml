@@ -38,7 +38,7 @@
         validate_certs: False
         power_on: False
         ovf: '{{ rhcos_ova_file_fullname }}'
-        disk_provisioning: "{{ vmware_disk_provisioning }}"
+        disk_provisioning: "{{ disk_provisioning }}"
         properties:
           guestinfo.ignition.config.data: ""
           guestinfo.ignition.config.data.encoding: "base64"

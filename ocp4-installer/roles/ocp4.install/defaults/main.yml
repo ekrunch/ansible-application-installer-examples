@@ -51,7 +51,8 @@ template_install_config: "install-config.yml.j2"
 template_append_bootstrap: "append-bootstrap.j2"
 
 # Options are "thin, thick, eagerzeroedthick"
-vmware_disk_provisioning: "thin"
+vmware_master_disk_provisioning: "thin"
+vmware_worker_disk_provisioning: "thin"
 
 # Pull secret is obtained from try.openshift.com
 pull_secret: '{"auths": ...}'
@@ -64,9 +65,13 @@ ssh_key: 'ssh-ed25519 AAAA...'
 bootstrap_url: "https://webserver.internal.yourdomain.com/ocp/bootstrap.ign"
 
 # Node creation defaults
-node_memory_mb: 32768
-node_num_cpus: 8
-node_num_cpu_cores_per_socket: 4
+master_node_memory_mb: 24576
+master_node_num_cpus: 4
+master_node_num_cpu_cores_per_socket: 4
+
+worker_node_memory_mb: 32768
+worker_node_num_cpus: 8
+worker_node_num_cpu_cores_per_socket: 4
 
 node_master_disk_size_in_gb: 50
 node_master_add_extra_disk: True

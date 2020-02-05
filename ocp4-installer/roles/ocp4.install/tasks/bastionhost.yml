@@ -17,6 +17,8 @@
     import_tasks: create_install_config.yml
 
   - name: Create template in VMware
+    vars:
+      disk_provisioning: "thin"
     import_tasks: vmware_create_template.yml
     when: "deploy_ova"
 
@@ -43,24 +45,33 @@
 
   - include_tasks: vmware_create_vms.yml
     vars:
-      primary_disk_size: "20"
       disk_provisioning: "thin"
+      node_memory_mb: 16384
+      node_num_cpus: 4
+      node_num_cpu_cores_per_socket: 4
+      primary_disk_size: "20"
     with_items: "{{ vm_bootstrap_list }}"
     loop_control:
       loop_var: vm_name
 
   - include_tasks: vmware_create_vms.yml
     vars:
+      disk_provisioning: "{{ vmware_master_disk_provisioning }}"
+      node_memory_mb: "{{ master_node_memory_mb }}"
+      node_num_cpus: "{{ master_node_num_cpus }}"
+      node_num_cpu_cores_per_socket: "{{ master_node_num_cpu_cores_per_socket }}"
       primary_disk_size: "{{ node_master_disk_size_in_gb }}"
-      disk_provisioning: "{{ vmware_disk_provisioning }}"
     with_items: "{{ vm_master_list }}"
     loop_control:
       loop_var: vm_name
 
   - include_tasks: vmware_create_vms.yml
     vars:
+      disk_provisioning: "{{ vmware_worker_disk_provisioning }}"
+      node_memory_mb: "{{ worker_node_memory_mb }}"
+      node_num_cpus: "{{ worker_node_num_cpus }}"
+      node_num_cpu_cores_per_socket: "{{ worker_node_num_cpu_cores_per_socket }}"
       primary_disk_size: "{{ node_worker_disk_size_in_gb }}"
-      disk_provisioning: "{{ vmware_disk_provisioning }}"
     with_items: "{{ vm_worker_list }}"
     loop_control:
       loop_var: vm_name
@@ -96,6 +107,7 @@
 
   - include_tasks: vmware_create_disks.yml
     vars:
+      disk_provisioning: "{{ vmware_master_disk_provisioning }}"
       vm_disk_size: "{{ node_master_extra_disk_size_in_gb }}"
     with_items: "{{ vm_master_list }}"
     loop_control:
@@ -104,6 +116,7 @@
 
   - include_tasks: vmware_create_disks.yml
     vars:
+      disk_provisioning: "{{ vmware_worker_disk_provisioning }}"
       vm_disk_size: "{{ node_worker_extra_disk_size_in_gb }}"
     with_items: "{{ vm_worker_list }}"
     loop_control:
