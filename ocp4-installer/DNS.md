@@ -4,10 +4,10 @@ This is my interpretation of the documentation for the UPI installation of VMwar
 
 In this tutorial, I'll use the following as a configuration example.
 
-3 Masters, 3 Workers, 1 bootstrap.
-1 Load Balancer
-Cluster Name : ocp4
-Domain Name : demolab.com
+- 3 Masters, 3 Workers, 1 bootstrap.
+- 1 Load Balancer
+- Cluster Name : ocp4
+- Domain Name : demolab.com
 
 **IP Addresses**
 - master1.ocp4.demolab.com - 172.16.31.10
