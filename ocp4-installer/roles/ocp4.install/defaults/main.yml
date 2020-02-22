@@ -46,6 +46,11 @@ ocp_cluster_folder: "ocp4"
 rhcos_template_name: "RHCOS"
 rhcos_template_vm_network: "VM Network"
 
+# Lock all memory
+vsphere_lock_memory: False
+# Latency Sensitivity - Options are "High" and "Normal", with Normal being the default
+vsphere_latency_sensitivity: "Normal"
+
 # Template overrides
 template_install_config: "install-config.yml.j2"
 template_append_bootstrap: "append-bootstrap.j2"

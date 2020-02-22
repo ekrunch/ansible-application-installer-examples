@@ -20,8 +20,12 @@
           datastore: "{{ vsphere_datastore }}"
         hardware:
           memory_mb: "{{ node_memory_mb }}"
+          memory_reservation_lock: "{{ vsphere_lock_memory }}"
           num_cpus: "{{ node_num_cpus }}"
           num_cpu_cores_per_socket: "{{ node_num_cpu_cores_per_socket }}"
           scsi: "paravirtual"
+        customvalues:
+        - key: "sched.cpu.latencySensitivity"
+          value: "{{ vsphere_latency_sensitivity }}"
       delegate_to: localhost
 

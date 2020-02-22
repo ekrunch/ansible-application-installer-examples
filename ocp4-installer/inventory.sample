@@ -16,7 +16,12 @@ vsphere_datastore="datastore"
 
 # These parameters are mutually exclusive so set one or the other, but not both!
 #vsphere_cluster="cluster1"
-vsphere_esxi_hostname="hostname1"
+vsphere_esxi_hostname="hostname1.internal.yourdomain.com"
+
+# Set this to true to lock all guest memory for the VM, required if using high latency sensitivity
+#vsphere_lock_memory=True
+# Latency Sensitivity - Options are "High" and "Normal", with Normal being the default
+#vsphere_latency_sensitivity="High"
 
 
 # These variables control whether or not the role will deploy the OVA 
