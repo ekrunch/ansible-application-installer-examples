@@ -46,7 +46,7 @@
   - include_tasks: vmware_create_vms.yml
     vars:
       disk_provisioning: "thin"
-      node_memory_mb: 16384
+      node_memory_mb: 12288
       node_num_cpus: 4
       node_num_cpu_cores_per_socket: 4
       primary_disk_size: "20"

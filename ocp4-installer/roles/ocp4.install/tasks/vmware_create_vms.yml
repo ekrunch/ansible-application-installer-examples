@@ -24,8 +24,11 @@
           num_cpus: "{{ node_num_cpus }}"
           num_cpu_cores_per_socket: "{{ node_num_cpu_cores_per_socket }}"
           scsi: "paravirtual"
+          version: "{{ vmware_guest_hardware_version }}"
         customvalues:
         - key: "sched.cpu.latencySensitivity"
           value: "{{ vsphere_latency_sensitivity }}"
+        - key: "disk.EnableUUID"
+          value: "TRUE"
       delegate_to: localhost
 

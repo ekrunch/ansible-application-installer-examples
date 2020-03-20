@@ -12,15 +12,15 @@
         state: "present"
         name: "{{ vm_name }}"
         vapp_properties:
-          - id: "disk.EnableUUID"
-            type: boolean
-            value: 'True'
-            operation: edit
           - id: "guestinfo.ignition.config.data.encoding"
             type: string
             value: "base64"
             operation: edit
       delegate_to: localhost
+#          - id: "disk.EnableUUID"
+#            type: boolean
+#            value: 'True'
+#            operation: edit
 
     - name: "Deploy {{ vm_metadata_type }} metadata on {{ vm_name }}"
       vmware_guest:

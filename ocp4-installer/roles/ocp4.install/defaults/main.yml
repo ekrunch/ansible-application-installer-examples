@@ -3,25 +3,25 @@
 # The install-files-directory will be passed to the installer
 # and will contain the resulting ignition files and base64 conversions
 ocp4_client_directory: "/home/presutti/bin"
-ocp4_client_installer_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.2.20/openshift-client-linux-4.2.20.tar.gz"
+ocp4_client_installer_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.3.5/openshift-client-linux-4.3.5.tar.gz"
 ocp4_client_archive_name: "{{ ocp4_client_installer_url | basename }}"
-ocp4_client_sha_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.2.20/sha256sum.txt"
+ocp4_client_sha_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.3.5/sha256sum.txt"
 
 ocp4_installer_directory: "/home/presutti/ocp"
 ocp4_installer_filename: "openshift-install"
 ocp4_install_config_name: "install-config.yaml"
 ocp4_install_files_directory: "{{ ocp4_installer_directory }}/data"
-ocp4_installer_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.2.20/openshift-install-linux-4.2.20.tar.gz"
+ocp4_installer_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.3.5/openshift-install-linux-4.3.5.tar.gz"
 ocp4_installer_archive_name: "{{ ocp4_installer_url | basename }}"
-ocp4_installer_sha_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.2.20/sha256sum.txt"
+ocp4_installer_sha_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.3.5/sha256sum.txt"
 
 # RHCOS OVA image
-rhcos_ova_url: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.2/4.2.0/rhcos-4.2.0-x86_64-vmware.ova"
+rhcos_ova_url: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.3/4.3.0/rhcos-4.3.0-x86_64-vmware.ova"
 rhcos_ova_archive_name: "{{ rhcos_ova_url | basename }}"
-rhcos_ova_sha_url: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.2/4.2.0/sha256sum.txt"
+rhcos_ova_sha_url: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.3/4.3.0/sha256sum.txt"
 
 # Purely cosmetic
-ocp4_major_minor_version: "4.2"
+ocp4_major_minor_version: "4.3"
 
 # Some combined variable names to make the later tasks easier to write :)
 ocp4_client_file_fullarchivename: "{{ ocp4_installer_directory }}/{{ ocp4_client_archive_name }}"
@@ -46,9 +46,9 @@ ocp_cluster_folder: "ocp4"
 rhcos_template_name: "RHCOS"
 rhcos_template_vm_network: "VM Network"
 
-# Lock all memory
+# Memory Locking - Lock all VM memory (Not required on OCP 4.3)
 vsphere_lock_memory: False
-# Latency Sensitivity - Options are "High" and "Normal", with Normal being the default
+# Latency Sensitivity - Options are "High" and "Normal", with Normal being the default (Not required on OCP 4.3)
 vsphere_latency_sensitivity: "Normal"
 
 # Template overrides
@@ -87,6 +87,7 @@ node_worker_add_extra_disk: True
 node_worker_extra_disk_size_in_gb: 100
 
 vmware_guest_os_id: "rhel7_64Guest"
+vmware_guest_hardware_version: 14
 
 # Cluster node counts - Will be overwritten based on inventory
 cluster_master_replicas: 3
