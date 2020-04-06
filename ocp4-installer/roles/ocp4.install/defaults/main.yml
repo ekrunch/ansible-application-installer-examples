@@ -16,9 +16,9 @@ ocp4_installer_archive_name: "{{ ocp4_installer_url | basename }}"
 ocp4_installer_sha_url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.3.8/sha256sum.txt"
 
 # RHCOS OVA image
-rhcos_ova_url: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.3/4.3.0/rhcos-4.3.0-x86_64-vmware.ova"
+rhcos_ova_url: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.3/4.3.8/rhcos-4.3.8-x86_64-vmware.x86_64.ova"
 rhcos_ova_archive_name: "{{ rhcos_ova_url | basename }}"
-rhcos_ova_sha_url: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.3/4.3.0/sha256sum.txt"
+rhcos_ova_sha_url: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.3/4.3.8/sha256sum.txt"
 
 # Purely cosmetic
 ocp4_major_minor_version: "4.3"
