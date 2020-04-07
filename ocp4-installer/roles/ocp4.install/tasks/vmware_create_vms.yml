@@ -4,7 +4,7 @@
         username: "{{ vsphere_username }}"
         password: "{{ vsphere_password }}"
         datacenter: "{{ vsphere_datacenter }}"
-        datastore: "{{ vsphere_datastore }}"
+        datastore: "{{ datastore }}"
         folder: "{{ ocp_cluster_folder }}"
         template: "{{ rhcos_template_name }}"
         validate_certs: False
@@ -17,7 +17,7 @@
         disk:
         - size_gb: "{{ primary_disk_size }}"
           type: "{{ disk_provisioning }}"
-          datastore: "{{ vsphere_datastore }}"
+          datastore: "{{ datastore }}"
         hardware:
           memory_mb: "{{ node_memory_mb }}"
           memory_reservation_lock: "{{ vsphere_lock_memory }}"

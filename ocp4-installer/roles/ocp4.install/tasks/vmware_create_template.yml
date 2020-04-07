@@ -16,7 +16,7 @@
         username: '{{ vsphere_username }}'
         password: '{{ vsphere_password }}'
         datacenter: '{{ vsphere_datacenter }}'
-        datastore: '{{ vsphere_datastore }}'
+        datastore: '{{ datastore }}'
         name: '{{ rhcos_template_name }}'
         folder: '{{ ocp_cluster_folder }}'
         validate_certs: False
@@ -29,7 +29,7 @@
         username: '{{ vsphere_username }}'
         password: '{{ vsphere_password }}'
         datacenter: '{{ vsphere_datacenter }}'
-        datastore: '{{ vsphere_datastore }}'
+        datastore: '{{ datastore }}'
         cluster: '{{ vsphere_cluster }}'
         name: '{{ rhcos_template_name }}'
         folder: '/{{ vsphere_datacenter }}/vm/{{ ocp_cluster_folder }}'

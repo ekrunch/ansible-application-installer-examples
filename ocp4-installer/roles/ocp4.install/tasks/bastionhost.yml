@@ -19,6 +19,7 @@
   - name: Create template in VMware
     vars:
       disk_provisioning: "thin"
+      datastore: "{{ vsphere_datastore_worker }}"
     import_tasks: vmware_create_template.yml
     when: "deploy_ova"
 
@@ -38,10 +39,10 @@
     set_fact:
       vm_worker_list: "{{ query('inventory_hostnames', 'workers', wantlist=True) }}"
 
-  - include_tasks: vmware_remove_vms.yml
-    with_items: "{{ vm_list }}"
-    loop_control:
-      loop_var: vm_name
+      #  - include_tasks: vmware_remove_vms.yml
+      #    with_items: "{{ vm_list }}"
+      #    loop_control:
+      #      loop_var: vm_name
 
   - include_tasks: vmware_create_vms.yml
     vars:
@@ -50,6 +51,7 @@
       node_num_cpus: 4
       node_num_cpu_cores_per_socket: 4
       primary_disk_size: "20"
+      datastore: "{{ vsphere_datastore_master }}"
     with_items: "{{ vm_bootstrap_list }}"
     loop_control:
       loop_var: vm_name
@@ -61,6 +63,7 @@
       node_num_cpus: "{{ master_node_num_cpus }}"
       node_num_cpu_cores_per_socket: "{{ master_node_num_cpu_cores_per_socket }}"
       primary_disk_size: "{{ node_master_disk_size_in_gb }}"
+      datastore: "{{ vsphere_datastore_master }}"
     with_items: "{{ vm_master_list }}"
     loop_control:
       loop_var: vm_name
@@ -72,6 +75,7 @@
       node_num_cpus: "{{ worker_node_num_cpus }}"
       node_num_cpu_cores_per_socket: "{{ worker_node_num_cpu_cores_per_socket }}"
       primary_disk_size: "{{ node_worker_disk_size_in_gb }}"
+      datastore: "{{ vsphere_datastore_worker }}"
     with_items: "{{ vm_worker_list }}"
     loop_control:
       loop_var: vm_name
@@ -80,6 +84,7 @@
     vars:
       vm_metadata_type: "Bootstrap"
       vm_metadata_data: "{{ metadata_bootstrap_result.content }}"
+      datastore: "{{ vsphere_datastore_master }}"
     with_items: "{{ vm_bootstrap_list }}"
     loop_control:
       loop_var: vm_name
@@ -88,6 +93,7 @@
     vars:
       vm_metadata_type: "Master"
       vm_metadata_data: "{{ metadata_master_result.content }}"
+      datastore: "{{ vsphere_datastore_master }}"
     with_items: "{{ vm_master_list }}"
     loop_control:
       loop_var: vm_name
@@ -96,6 +102,7 @@
     vars:
       vm_metadata_type: "Worker"
       vm_metadata_data: "{{ metadata_worker_result.content }}"
+      datastore: "{{ vsphere_datastore_worker }}"
     with_items: "{{ vm_worker_list }}"
     loop_control:
       loop_var: vm_name
@@ -109,6 +116,7 @@
     vars:
       disk_provisioning: "{{ vmware_master_disk_provisioning }}"
       vm_disk_size: "{{ node_master_extra_disk_size_in_gb }}"
+      datastore: "{{ vsphere_datastore_master }}"
     with_items: "{{ vm_master_list }}"
     loop_control:
       loop_var: vm_name
@@ -118,6 +126,7 @@
     vars:
       disk_provisioning: "{{ vmware_worker_disk_provisioning }}"
       vm_disk_size: "{{ node_worker_extra_disk_size_in_gb }}"
+      datastore: "{{ vsphere_datastore_worker }}"
     with_items: "{{ vm_worker_list }}"
     loop_control:
       loop_var: vm_name

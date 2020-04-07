@@ -10,13 +10,15 @@ controlPlane:
   replicas: {{ cluster_master_replicas | mandatory }}
 metadata:
   name: '{{ cluster_name | mandatory }}'
+networking:
+  networkType: '{{ openshift_sdn_type }}'
 platform:
   vsphere:
     vcenter: '{{ vsphere_server | mandatory }}'
     username: '{{ vsphere_username }}'
     password: '{{ vsphere_password }}'
     datacenter: '{{ vsphere_datacenter }}'
-    defaultDatastore: '{{ vsphere_datastore }}'
+    defaultDatastore: '{{ vsphere_datastore_worker }}'
 fips: false
 pullSecret: '{{ pull_secret | mandatory }}'
 sshKey: '{{ ssh_key }}'

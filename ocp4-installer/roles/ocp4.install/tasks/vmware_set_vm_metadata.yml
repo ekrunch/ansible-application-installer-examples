@@ -4,7 +4,7 @@
         username: "{{ vsphere_username }}"
         password: "{{ vsphere_password }}"
         datacenter: "{{ vsphere_datacenter }}"
-        datastore: "{{ vsphere_datastore }}"
+        datastore: "{{ datastore }}"
         esxi_hostname: "{{ vsphere_esxi_hostname if vsphere_use_esxi_hostname else omit}}"
         cluster: "{{ vsphere_cluster if vsphere_use_cluster else omit}}"
         validate_certs: False
@@ -28,7 +28,7 @@
         username: "{{ vsphere_username }}"
         password: "{{ vsphere_password }}"
         datacenter: "{{ vsphere_datacenter }}"
-        datastore: "{{ vsphere_datastore }}"
+        datastore: "{{ datastore }}"
         esxi_hostname: "{{ vsphere_esxi_hostname if vsphere_use_esxi_hostname else omit}}"
         cluster: "{{ vsphere_cluster if vsphere_use_cluster else omit}}"
         validate_certs: False
@@ -48,7 +48,7 @@
         username: "{{ vsphere_username }}"
         password: "{{ vsphere_password }}"
         datacenter: "{{ vsphere_datacenter }}"
-        datastore: "{{ vsphere_datastore }}"
+        datastore: "{{ datastore }}"
         esxi_hostname: "{{ vsphere_esxi_hostname if vsphere_use_esxi_hostname else omit}}"
         cluster: "{{ vsphere_cluster if vsphere_use_cluster else omit}}"
         validate_certs: False

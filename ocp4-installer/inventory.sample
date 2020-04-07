@@ -10,7 +10,8 @@ vsphere_server="vcenter.internal.yourdomain.com"
 vsphere_username="administrator@internal.yourdomain.com"
 vsphere_password="test123"
 vsphere_datacenter="datacenter"
-vsphere_datastore="datastore"
+vsphere_datastore_master="datastore_fast_disk"
+vsphere_datastore_worker="datastore_normal_disk"
 # The Ansible vmware_guest module documentation states that either a cluster name or hostname is required to be set.
 # Your mileage may vary here so experiment and see what works best
 
