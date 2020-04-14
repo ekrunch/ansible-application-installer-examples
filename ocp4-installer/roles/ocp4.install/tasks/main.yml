@@ -1,8 +1,0 @@
-  - name: Call tasks for bastion hosts
-    import_tasks: bastionhost.yml
-    when: "inventory_hostname in groups['bastionhost']"
-
-  - name: Call tasks for bootstrap webservers
-    import_tasks: copy_bootstrap_file.yml
-    when: "inventory_hostname in groups['bootstrapwebservers']"
-

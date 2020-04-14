@@ -1,9 +1,0 @@
----
-- hosts: OSEv4
-  gather_facts: no
-  tasks:
-
-  - name: "Set cluster power state to {{ VM_POWERSTATE }}"
-    import_role:
-      name: ocp4.clusterpower
-    when: "inventory_hostname in groups['bastionhost']"
